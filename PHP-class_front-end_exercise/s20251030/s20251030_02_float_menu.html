@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 隱藏旁邊多的滾輪 */
+        * {
+            overflow: hidden;
+        }
+
+        /* 左邊菜單列的版面設計 */
+        .container-menu {
+            float: left;
+            width: 20%;
+            height: 100vh;
+            background-color: bisque;
+        }
+
+        /* 左邊菜單列的連結設計 */
+        .container-menu>a {
+            /* display: inline-block; */
+            display: block;
+            width: 200px;
+            height: 200px;
+            background-color: lightgoldenrodyellow;
+            margin: auto;
+            margin-top: 10%;
+            text-align: center;
+            /* padding-top: 25%; */
+            box-sizing: border-box;
+            font-size: 30px;
+            /* line-height 調整單行文字的間距 */
+            line-height: 6.2;
+        }
+
+        /* 右邊版面設定 */
+        .container-main {
+            float: left;
+            width: 80%;
+            /* width: 60%; */
+            height: 100vh;
+            background-color: darkgoldenrod;
+        }
+
+        /* .container-ad {
+            float: left;
+            width: 20%;
+            height: 100vh;
+            background-color: honeydew;
+        } */
+
+        /* 內嵌頁面尺寸設定 */
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 右下角區塊（返回首頁）版面設定 */
+        .fixed {
+            width: 50px;
+            height: 50px;
+            background-color: darkgray;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            text-align: center;
+        }
+
+        /* 右下角區塊（返回首頁）圖片設定 */
+        .fixed img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 菜單列，可於畫面右方顯示移動的頁面 -->
+    <div class="container-menu">
+        <a href="./web/pageA.html" target="myIframe">
+            <img src="./images/a.png" alt="" width="100%" height="100%">
+        </a>
+        <a href="./web/pageB.html" target="myIframe">
+            <img src="./images/b.gif" alt="" width="100%" height="100%">
+        </a>
+        <a href="./web/pageC.html" target="myIframe">C</a>
+    </div>
+    <!-- 主頁面，可從左側菜單列選擇不同的頁面 -->
+    <div class="container-main">
+        <iframe name="myIframe" src="./web/pageA.html" frameborder="0"></iframe>
+    </div>
+    <!-- <div class="container-ad">
+
+    </div> -->
+    <!-- 返回首頁 -->
+    <div class="fixed">
+        <a href="./web/pageA.html" target="myIframe">
+            <img src="./images/home.jpg" alt="">
+        </a>
+    </div>
+</body>
+
+</html>

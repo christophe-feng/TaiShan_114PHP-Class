@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .nav {
+            width: 100%;
+            height: 10vh;
+            background-color: antiquewhite;
+            position: fixed;
+            top: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 20px;
+            padding: 0 15px;
+        }
+
+        .nav>div {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo>img {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .content {
+            width: 90%;
+            height: 100vh;
+            margin: auto;
+        }
+
+        .content:first-of-type {
+            margin-top: calc(10vh + 20px);
+            /* 導航列高度 + 額外間距 */
+        }
+
+        .dateandvenue {
+            background-color: darkcyan;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .date {
+            width: 49%;
+            height: 100%;
+            background-color: beige;
+            display: flex;
+            justify-content: center;
+            /* 水平置中 */
+            align-items: center;
+            /* 垂直置中 */
+
+        }
+
+        .date>fieldset {
+            text-align: left;
+            font-size: 40px;
+            border: none;
+        }
+
+        .venue {
+            width: 49%;
+            height: 100%;
+            background-color: aquamarine;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* gap: 20px; */
+        }
+
+        .venue p {
+            font-size: 40px;
+            padding-top: 200px;
+        }
+
+        .venue img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            padding-bottom: 150px;
+        }
+
+        .venue-box-in {
+            width: 250px;
+            height: 30px;
+            background-color: darksalmon;
+            position: absolute;
+            right: 171px;
+            bottom: 193px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .presenter {
+            background-color: greenyellow;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            padding: 40px 20px;
+            /* ⭐ 加上內距 */
+            gap: 20px;
+            /* ⭐ 元素之間的間距 */
+            align-items: center;
+            /* ⭐ 垂直對齊 */
+        }
+
+        .presenter1,
+        .presenter2,
+        .presenter3 {
+            background-color: black;
+            flex: 1;
+            /* ⭐ 平均分配空間，取代 width: 30% */
+            height: 80%;
+            /* ⭐ 相對於父容器的高度 */
+            display: flex;
+            /* ⭐ 讓圖片可以置中 */
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* ⭐ 圖片與邊框的距離 */
+            border-radius: 10px;
+            /* 圓角 */
+        }
+
+        .presenter1 img,
+        .presenter2 img,
+        .presenter3 img {
+            width: 100%;
+            /* ⭐ 圖片寬度填滿容器 */
+            height: 100%;
+            /* ⭐ 圖片高度填滿容器 */
+            object-fit: cover;
+            /* ⭐ 裁切圖片以填滿空間（保持比例） */
+            /* 或使用 object-fit: contain; 完整顯示圖片（可能有留白） */
+            border-radius: 8px;
+            /* 圖片圓角 */
+        }
+
+        .presenter1-box-in {
+            width: 500px;
+            height: 30px;
+            background-color: cyan;
+            position: absolute;
+            right: 60px;
+            bottom: -110px;
+        }
+
+        .presenter2-box-in {
+            width: 500px;
+            height: 30px;
+            background-color: cyan;
+            position: absolute;
+            right: 60px;
+            bottom: -110px;
+        }
+
+        .presenter3-box-in {
+            width: 500px;
+            height: 30px;
+            background-color: cyan;
+            position: absolute;
+            right: 60px;
+            bottom: -110px;
+        }
+
+        .finalresult {
+            background-color: lemonchiffon;
+        }
+
+        .fixed>a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            /* 使用 flex 置中 */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fixed {
+            width: 50px;
+            height: 50px;
+            background-color: thistle;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            text-align: center;
+        }
+
+        .fixed img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <img src="./photo/esc-2025-banner.jpg" alt="">
+        </div>
+        <div class="chapterA">
+            <a href="#chapterA">Date & Venue</a>
+        </div>
+        <div class="chapterB">
+            <a href="#chapterB">Presenter</a>
+        </div>
+        <div class="chapterC">
+            <a href="#chapterC">Final Result</a>
+        </div>
+        <div class="logo">
+            <img src="./photo/esc-2025-banner.jpg" alt="">
+        </div>
+    </div>
+    <div id="chapterA"></div>
+    <div class="content dateandvenue">
+        <div class="date">
+            <fieldset>
+                <legend>Date</legend>
+                <ul>
+                    <li>Semi-final 1: May 13</li>
+                    <li>Semi-final 2: May 15</li>
+                    <li>Grand final: May 17</li>
+                </ul>
+            </fieldset>
+        </div>
+        <div class="venue">
+            <p>Venue</p>
+            <img src="./photo/St. Jakobshalle.jpeg" alt="">
+            <div class="venue-box-in">St. Jakobshalle</div>
+        </div>
+    </div>
+    <div id="chapterB"></div>
+    <div class="content presenter">
+        <h3>Presenters</h3>
+        <div class="presenter1">
+            <img src="./photo/Sandra Studer.jpg" alt="">
+            <div class="presenter1-box-in">Sandra Studer</div>
+        </div>
+        <div class="presenter2">
+            <img src="./photo/Hazel Bruggerjpg.jpg" alt="">
+            <div class="presenter2-box-in">Hazel Brugger</div>
+        </div>
+        <div class="presenter3">
+            <img src="./photo/Michelle Hunzikerjpg.jpg" alt="">
+            <div class="presenter3-box-in">Michelle Hunziker</div>
+        </div>
+    </div>
+    <div id="chapterC"></div>
+    <div class="content finalresult">
+        <h3>Final Result</h3>
+        <div class="first">
+            <img src="./photo/JJ.jpg" alt="">
+            <div class="first-box-in">Austria-JJ</div>
+        </div>
+        <div class="second">
+            <img src="./photo/Yuval Raphael.jpeg" alt="">
+            <div class="second-box-in">Israel-Yuval Raphael</div>
+        </div>
+        <div class="third">
+            <img src="./photo/Tommy Cash.jpg" alt="">
+            <div class="third-box-in">Estonia-Tommy Cash</div>
+        </div>
+    </div>
+    <div class="fixed">
+        <a href="#">
+            <img src="./photo/top.png" alt="">
+        </a>
+    </div>
+</body>
+
+</html>

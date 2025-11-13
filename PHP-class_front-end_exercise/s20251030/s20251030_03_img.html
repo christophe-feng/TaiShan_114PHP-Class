@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img-fluid {
+            width: 20%;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: aliceblue;
+            background-image: url('./photo/authority.png');
+            background-position: right bottom;
+            /* background-size: contain; */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <h2>圖片插入方式</h2>
+    <h3>直接插入圖片</h3>
+    <div>
+        <img class="img-fluid" src="./photo/approach.png" alt="">
+    </div>
+    <br>
+    <hr>
+    <br>
+    <h3>使用background image</h3>
+    <div class="box">
+
+    </div>
+</body>
+</html>

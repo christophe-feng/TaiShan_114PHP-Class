@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 所有的element邊框都不留，
+            總共占用的空間會根據我設定的長寬來呈現 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 導覽連結的區塊 */
+        .nav {
+            width: 100%;
+            height: 60px;
+            background-color: blanchedalmond;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* 連結的設定 */
+        a {
+            width: 50px;
+            height: 55px;
+            background: whitesmoke;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        /* areaA的底色設定 */
+        .areaA {
+            background-color: aqua;
+        }
+
+        /* areaA的圖片設定 */
+        .areaA img {
+            float: right;
+            width: 15%;
+            margin-right: 50px;
+        }
+
+        /* areaB的底色設定 */
+        .areaB {
+            background-color: palevioletred;
+        }
+
+        /* areaB hover後的效果 */
+        .areaB:hover {
+            background-color: greenyellow;
+        }
+
+        /* areaC的區塊設定 */
+        .areaC {
+            background-color: moccasin;
+            padding: 20px 0;
+        }
+
+        /* 所有area的區塊設定 */
+        .area {
+            width: 90%;
+            height: 500px;
+            display: block;
+            margin: 5px auto;
+            padding: 0;
+        }
+
+        /* contentC的區塊設定 */
+        .contentC {
+            width: 40%;
+            height: 460px;
+            background-color: black;
+            color: wheat;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .form {
+            width: 39%;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 5%;
+            margin-top: 30px;
+        }
+
+        /* hr {
+            border: none;
+            height: 1px;
+            background-color: #ccc;
+        } */
+
+        /* 右下角區塊版面設定 */
+        .fixed {
+            width: 30px;
+            height: 30px;
+            background-color: navy;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            text-align: center;
+        }
+
+        /* 右下角圖片設定 */
+        .fixed img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 表單區塊字體置中 */
+        .form {
+            text-align: center;
+        }
+
+        /* 欄位群組版面設定 */
+        fieldset {
+            width: 100%;
+            height: auto;
+            background-color: darksalmon;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 導覽列，點選連結可移至相對應的區塊 -->
+    <!-- 有圖片和文字的連結作法，可對照 -->
+    <div class="nav">
+        <!-- 移動到areaA，圖片連結 -->
+        <a href="#blockA">
+            <img src="./photo/assess.png" alt="" width="75%">
+        </a>
+        <!-- 移動到areaB，圖片連結 -->
+        <a href="#blockB">
+            <img src="./photo/benefit.png" alt="" width="75%">
+        </a>
+        <!-- 移動到areaC，文字連結 -->
+        <a href="#blockC">linkC</a>
+    </div>
+    <hr>
+    <!-- area A -->
+    <div id="blockA"></div>
+    <div class="area areaA">
+        <h4><b>areaA</b></h4>
+        <img src="./photo/analyze.png" alt="" width="10%">
+    </div>
+    <!-- area B -->
+    <div id="blockB"></div>
+    <div class="area areaB">
+        <h4><b>areaB</b></h4>
+    </div>
+    <!-- area C -->
+    <div id="blockC"></div>
+    <div class="area areaC">
+        <h4><b>areaC</b></h4>
+        <div class="contentC">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam sequi aliquid illum autem sint molestiae,
+            laboriosam veniam voluptatum eaque dolor temporibus dignissimos natus commodi perferendis beatae vero
+            aperiam dolores, deleniti consequuntur ratione est, officia nemo? Nesciunt quasi ullam reprehenderit, modi
+            explicabo at cumque! Repellat quos blanditiis, vero itaque quas tempore, voluptates rem, quae fugiat
+            praesentium minus quia. Suscipit, praesentium. Rem voluptatibus ipsa maxime aperiam, doloremque dolor quidem
+            odio officia enim beatae deserunt optio hic quas nemo saepe, doloribus eum. Iure dolores provident aliquam?
+            Commodi facere ipsa illo odit enim, natus asperiores dolores reiciendis? Deserunt labore suscipit alias
+            nesciunt ipsa, voluptatem sunt nostrum corporis unde similique vel officiis quo. Explicabo unde quaerat
+            nulla nemo perferendis facere inventore dolores, asperiores id? Doloribus dolorem ratione molestias rem!
+            Cupiditate, cum? Nihil, numquam suscipit facere est ad, architecto recusandae debitis fugit doloremque nemo
+            eveniet officia dicta, odit eligendi error illum voluptatibus consectetur maiores nostrum labore.
+            Necessitatibus ducimus velit optio aperiam temporibus vel sunt, dolorum consectetur sapiente tempore!
+            Dolores iste corrupti atque nihil illo adipisci? Repellat excepturi quidem commodi officiis, optio debitis
+            similique nesciunt necessitatibus illo voluptates dicta at aliquam sapiente impedit cum non sunt aut
+            perferendis modi tempore. Numquam enim consectetur voluptatibus assumenda vero maxime sapiente natus. Quod
+            totam doloremque architecto, perferendis eum debitis perspiciatis possimus vero distinctio nostrum sit iure
+            nihil tempore ab saepe error voluptates odit quisquam quis odio quia eius? Officia, itaque explicabo!
+            Accusamus tenetur voluptate culpa minus aperiam impedit, quo distinctio modi quidem dicta tempore! Excepturi
+            molestiae suscipit iure voluptate sequi, maxime velit magnam dignissimos, expedita ullam doloribus
+            reprehenderit id provident culpa consequatur autem alias aperiam consequuntur explicabo nulla placeat! Earum
+            rem praesentium necessitatibus, unde tempore sit ducimus dolorem porro saepe eos laboriosam maxime sapiente,
+            consectetur quae cupiditate fugit delectus magni adipisci repellendus molestias dolore placeat? Fugiat iure
+            repudiandae quos delectus tenetur reiciendis deleniti nisi corporis quae, blanditiis dignissimos. Earum modi
+            quod adipisci officia quaerat eius laudantium fuga ipsam, perferendis consectetur accusamus error, voluptate
+            cupiditate recusandae maxime, quidem alias minima quam quisquam eum amet eos incidunt dicta? Voluptatibus
+            dicta laudantium optio quis libero quas expedita fuga quaerat odio veniam repudiandae minus repellendus
+            cupiditate quia, distinctio doloremque reprehenderit repellat aperiam nam itaque odit perferendis. Deleniti
+            quidem blanditiis doloribus quos commodi maxime dignissimos reiciendis et sint possimus est architecto, quia
+            totam vitae error, consequatur, explicabo distinctio reprehenderit praesentium eum nulla aperiam harum! Ex
+            nam, inventore iste, excepturi repellendus officia facilis ea itaque quia, nihil molestias commodi odio aut
+            delectus error. Et dolor magnam similique fugiat pariatur? Minus repellat quibusdam sed numquam consequatur,
+            praesentium officiis! Officiis hic amet possimus eaque repudiandae tenetur deleniti, expedita dolorem dolore
+            obcaecati, nihil, ipsum ducimus accusamus ab illo tempore cum perspiciatis? Cupiditate eveniet quo aut error
+            numquam tempora voluptate! Ipsum iste labore hic, quibusdam tenetur iusto cumque cum blanditiis
+            necessitatibus eum asperiores suscipit obcaecati delectus id deserunt minima odit nobis sapiente voluptatum
+            unde ex quisquam quidem. At nihil ut quas eos omnis exercitationem, consequatur ipsa nemo, accusantium,
+            consequuntur nisi? Vitae, atque. Eligendi, perferendis? Enim, quod architecto! Dolores, veritatis ducimus.
+        </div>
+        <!-- 右邊嘗試使用表單 -->
+        <div class="form">
+            <form action="">
+                <fieldset>
+                    <legend>表單輸入</legend>
+                    <label for="textInput">可輸入文字</label>
+                    <br>
+                    <textarea name="textInput" id="textInput" cols="50" rows="20"></textarea>
+                    <br>
+                    <input type="submit" value="submit">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <!-- 返回頂端 -->
+    <div class="fixed">
+        <a href="#">
+            <img src="./photo/top.png" alt="">
+        </a>
+    </div>
+</body>
+
+</html>

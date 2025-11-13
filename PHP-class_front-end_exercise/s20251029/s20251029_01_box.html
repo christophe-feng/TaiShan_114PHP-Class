@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            width: 50px;
+            height: 50px;
+            background-color: skyblue;
+            display: inline;
+            display: inline-block;
+            display: block;
+        }
+
+        .block {
+            display: block;
+            background: #a8d8ea;
+            margin: 10px;
+            height: 50px;
+        }
+
+        .inline {
+            display: inline;
+            background: #f9c0c0;
+        }
+
+        .inline-block {
+            display: inline-block;
+            background: #c0f9c0;
+            width: 100px;
+            height: 50px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- inline → 不換行 -->
+    <!-- block → 可調整大小 -->
+    <!-- inline-block → -->
+    <a href="">linkA</a>
+    <a href="">linkB</a>
+    <a href="">linkC</a>
+    <br>
+    <hr>
+    <br>
+
+    <div class="block">Block 1</div>
+    <div class="block">Block 2</div>
+
+    <span class="inline">Inline 1</span>
+    <span class="inline">Inline 2</span>
+
+    <div class="inline-block">IB 1</div>
+    <div class="inline-block">IB 2</div>
+
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {background-color: lavender;}
+    table {
+        width: 50%;
+        margin: auto;
+        border-collapse: collapse;
+    }
+
+    table,
+    tr,
+    td {
+        /* border: 1px solid black; */
+    }
+
+    td {
+        height: 20vh;
+        width: 100px;
+        /* background-color: bisque; */
+    }
+
+    /* .robot-head {} */
+
+    .robot-body {
+        height: 50vh;
+    }
+
+    .robot-hand {
+        height: 30vh;
+    }
+
+    .robot-foot {
+        height: 20vh;
+    }
+
+    .box-head {
+        width: 50%;
+        height: 100%;
+        background-color: aqua;
+        margin: auto;
+        box-shadow: 5px 5px 7px lightgrey;
+    }
+
+    .box-body {
+        width: 90%;
+        height: 100%;
+        background-color: rgb(157, 195, 228);
+        margin: auto;
+        box-shadow: 5px 5px 7px lightgrey;
+    }
+
+    .box-hand-left {
+        width: 100%;
+        height: 90%;
+        background-color: blanchedalmond;
+        margin: auto;
+box-shadow: 5px 5px 7px lightgrey
+    }
+
+    .box-hand-right {
+        width: 100%;
+        height: 90%;
+        background-color: bisque;
+        margin: auto;
+        box-shadow: 5px 5px 7px lightgrey
+    }
+
+    .box-foot-left {
+        width: 75%;
+        height: 95%;
+        background-color: cadetblue;
+        margin: auto;
+        box-shadow: 5px 5px 7px lightgrey
+    }
+
+    .box-foot-right {
+        width: 75%;
+        height: 95%;
+        background-color: cornflowerblue;
+        margin: auto;
+        box-shadow: 5px 5px 7px lightgrey
+    }
+</style>
+
+<body>
+    <table>
+        <tr>
+            <td></td>
+            <td colspan="3">
+                <div class="box-head"></div>
+            </td>
+            <!-- <td></td>
+            <td></td> -->
+            <td></td>
+        </tr>
+        <tr>
+            <td class="robot-hand">
+                <div class="box-hand-left"></div>
+            </td>
+            <td class="robot-body" colspan="3" rowspan="2">
+                <div class="box-body"></div>
+            </td>
+            <!-- <td></td>
+            <td></td> -->
+            <td class="robot-hand">
+                <div class="box-hand-right"></div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <!-- <td></td>
+            <td></td>
+            <td></td> -->
+            <td></td>
+        </tr>
+        <tr>
+            <td class="robot-foot" colspan="2">
+                <div class="box-foot-left"></div>
+            </td>
+            <!-- <td></td> -->
+            <td></td>
+            <td class="robot-foot" colspan="2">
+                <div class="box-foot-right"></div>
+            </td>
+            <!-- <td></td> -->
+    </table>
+</body>
+
+</html>

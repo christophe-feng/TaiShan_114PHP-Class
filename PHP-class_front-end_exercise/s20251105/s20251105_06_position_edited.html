@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESC 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9fb;
+            color: #333;
+        }
+
+        /* ============ 導覽列 ============ */
+        .nav {
+            width: 100%;
+            height: 80px;
+            background-color: antiquewhite;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 70px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d35400;
+        }
+
+        /* ============ 英雄橫幅圖（導覽列與內容中間） ============ */
+        .hero-banner {
+            width: 100%;
+            padding: 100px 0 60px;
+            /* 上留空間避開 fixed nav，下留白 */
+            background: linear-gradient(to bottom, #f9f9fb, #e3f2fd);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-banner img {
+            width: 90%;
+            max-width: 1100px;
+            /* 最大寬度限制 */
+            height: auto;
+            max-height: 500px;
+            /* 限制高度，避免過高 */
+            object-fit: contain;
+            /* 保持比例，完整顯示 */
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        /* ============ 內容容器 ============ */
+        .content {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 0 60px;
+        }
+
+        .content:first-of-type {
+            padding-top: 120px;
+        }
+
+        /* ============ Date & Venue ============ */
+        .dateandvenue {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            background-color: #e3f2fd;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .date,
+        .venue {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .date fieldset {
+            border: none;
+            font-size: 36px;
+            font-weight: bold;
+            color: #006064;
+            padding-left: 30px;
+            /* padding-top: 20px; */
+        }
+
+        .date legend {
+            font-size: 24px;
+            color: #00796b;
+            /* padding: 0 10px; */
+        }
+
+        .date ul {
+            margin-top: 15px;
+            margin-left: 30px;
+            font-size: 20px;
+            color: #444;
+        }
+
+        .date li {
+            margin-bottom: 10px;
+        }
+
+        .venue p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00695c;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .venue img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .venue-name {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #e91e63;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        /* ============ Presenters ============ */
+        .presenter {
+            padding: 40px 0;
+        }
+
+        .presenter h3,
+        .finalresult h3 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .presenter-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .presenter-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .presenter-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .presenter-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .presenter-name {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* ============ Final Result ============ */
+        .finalresult {
+            background-color: #fffde7;
+            padding: 40px 0;
+            border-radius: 12px;
+            margin-bottom: 60px;
+        }
+
+        .result-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .result-card {
+            flex: 1;
+            min-width: 260px;
+            max-width: 320px;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .result-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .result-card .label {
+            font-weight: bold;
+            font-size: 18px;
+            color: #d4af37;
+            background-color: #fff8e1;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* ============ 回到頂部 ============ */
+        .fixed>a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            /* 使用 flex 置中 */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fixed {
+            width: 50px;
+            height: 50px;
+            background-color: thistle;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            text-align: center;
+        }
+
+        .fixed img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* ============ 響應式 ============ */
+        /* @media (max-width: 768px) {
+            .nav {
+                height: 70px;
+                padding: 0 15px;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 16px;
+            }
+
+            .content {
+                width: 95%;
+                padding: 90px 0 40px;
+            }
+
+            .dateandvenue,
+            .presenter,
+            .finalresult {
+                padding: 20px;
+            }
+
+            .date fieldset,
+            .venue p {
+                font-size: 28px;
+            }
+
+            .presenter h3,
+            .finalresult h3 {
+                font-size: 26px;
+            }
+        } */
+    </style>
+</head>
+
+<body>
+
+    <!-- 導覽列 -->
+    <div class="nav">
+        <div class="logo">
+            <img src="./photo/esc-2025-banner.jpg" alt="ESC 2025 Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#chapterA">Date & Venue</a>
+            <a href="#chapterB">Presenters</a>
+            <a href="#chapterC">Final Result</a>
+        </div>
+        <div class="logo">
+            <img src="./photo/esc-2025-banner.jpg" alt="ESC 2025 Logo">
+        </div>
+    </div>
+
+    <!-- 導覽列下方的大橫幅圖 -->
+    <div class="hero-banner">
+        <img src="./photo/esc-2025-banner.jpg" alt="ESC 2025 Banner">
+    </div>
+
+    <!-- Date & Venue -->
+    <div id="chapterA" class="content">
+        <div class="dateandvenue">
+            <div class="date">
+                <fieldset>
+                    <legend>Date</legend>
+                    <ul>
+                        <li>Semi-final 1: May 13</li>
+                        <li>Semi-final 2: May 15</li>
+                        <li>Grand final: May 17</li>
+                    </ul>
+                </fieldset>
+            </div>
+            <div class="venue">
+                <p>Venue</p>
+                <img src="./photo/St. Jakobshalle.jpeg" alt="St. Jakobshalle">
+                <div class="venue-name">St. Jakobshalle</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Presenters -->
+    <div id="chapterB" class="content">
+        <div class="presenter">
+            <h3>Presenters</h3>
+            <div class="presenter-grid">
+                <div class="presenter-card">
+                    <img src="./photo/Sandra Studer.jpg" alt="Sandra Studer">
+                    <div class="presenter-name">Sandra Studer</div>
+                </div>
+                <div class="presenter-card">
+                    <img src="./photo/Hazel Bruggerjpg.jpg" alt="Hazel Brugger">
+                    <div class="presenter-name">Hazel Brugger</div>
+                </div>
+                <div class="presenter-card">
+                    <img src="./photo/Michelle Hunzikerjpg.jpg" alt="Michelle Hunziker">
+                    <div class="presenter-name">Michelle Hunziker</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Result -->
+    <div id="chapterC" class="content">
+        <div class="finalresult">
+            <h3>Final Result</h3>
+            <div class="result-grid">
+                <div class="result-card">
+                    <a href="https://www.youtube.com/watch?v=onOex2WXjbA&list=RDonOex2WXjbA&start_radio=1">
+                        <img src="./photo/JJ.jpg" alt="Austria JJ">
+                    </a>
+                    <div class="label">1st - Austria: JJ</div>
+                </div>
+                <div class="result-card">
+                    <a href="https://www.youtube.com/watch?v=_7zHp51j2WM&list=RD_7zHp51j2WM&start_radio=1">
+                        <img src="./photo/Yuval Raphael.jpeg" alt="Israel Yuval Raphael">
+                    </a>
+                    <div class="label">2nd - Israel: Yuval Raphael</div>
+                </div>
+                <div class="result-card">
+                    <a href="https://www.youtube.com/watch?v=9b9Z5HSCXOI&list=RD9b9Z5HSCXOI&start_radio=1">
+                        <img src="./photo/Tommy Cash.jpg" alt="Estonia Tommy Cash">
+                    </a>
+                    <div class="label">3rd - Estonia: Tommy Cash</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 回到頂部 -->
+    <div class="fixed">
+        <a href="#">
+            <img src="./photo/top.png" alt="Top">
+        </a>
+    </div>
+
+</body>
+
+</html>

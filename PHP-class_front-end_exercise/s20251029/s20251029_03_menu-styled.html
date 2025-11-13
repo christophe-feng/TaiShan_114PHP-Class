@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            /* display: inline-block; */
+            vertical-align: top;
+        }
+
+        .container-nav {
+            float: left;
+            width: 5%;
+            height: 100vh;
+            background-color: yellow;
+            /* display: inline-block; */
+        }
+
+        .container-content {
+            float: left;
+            width: 93%;
+            height: 100vh;
+            padding-left: 1%;
+            /* display: inline-block; */
+        }
+
+        .container-nav>a {
+            width: 100%;
+            height: 50px;
+            background: whitesmoke;
+            display: inline-block;
+            margin: auto;
+            /* margin-top: 5%; */
+            text-align: center;
+            /* padding-top: 5%; */
+            line-height: 50px;
+            box-sizing: border-box;
+        }
+
+        .area {
+            width: 100%;
+            height: 500px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .areaA {
+            background-color: aqua;
+        }
+
+        .areaA img {
+            float: right;
+            width: 15%;
+            margin-right: 50px;
+        }
+
+        .areaB {
+            background-color: green;
+        }
+
+        .areaB:hover {
+            background-color: hotpink;
+        }
+
+        .areaC {
+            background-color: moccasin;
+        }
+
+        .contentC {
+            width: 45%;
+            height: 470px;
+            background-color: black;
+            color: wheat;
+            margin-left: 1%;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .fixed>a {
+            display: block;
+            /* 讓 a 標籤變成 block */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            /* 使用 flex 置中 */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fixed {
+            width: 50px;
+            height: 50px;
+            background-color: thistle;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            text-align: center;
+        }
+
+        .fixed img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+
+        /* 表單區塊字體置中 */
+        .form {
+            width: 45%;
+            display: inline-block;
+            text-align: center;
+            margin-left: 3.7%;
+            margin-top: 1%;
+            vertical-align: top;
+        }
+
+        /* 欄位群組版面設定 */
+        fieldset {
+            width: 100%;
+            height: auto;
+            background-color: darksalmon;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container container-nav">
+        <a href="#blockA">
+            <img src="./photo/assess.png" alt="" width="35%" height="100%">
+        </a>
+        <br>
+        <a href="#blockB">
+            <img src="./photo/benefit.png" alt="" width="35%" height="100%">
+        </a>
+        <br>
+        <a href="#blockC">linkC</a>
+    </div>
+    <div class="container container-content">
+        <div id="blockA"></div>
+        <div class="area areaA">A區
+            <br>
+            <img src="./photo/analyze.png" alt="" width="10%">
+        </div>
+        <div id="blockB"></div>
+        <div class="area areaB">B區</div>
+        <div id="blockC"></div>
+        <div class="area areaC">C區
+            <br>
+            <div class="contentC">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam sequi aliquid illum autem sint
+                molestiae,
+                laboriosam veniam voluptatum eaque dolor temporibus dignissimos natus commodi perferendis beatae vero
+                aperiam dolores, deleniti consequuntur ratione est, officia nemo? Nesciunt quasi ullam reprehenderit,
+                modi
+                explicabo at cumque! Repellat quos blanditiis, vero itaque quas tempore, voluptates rem, quae fugiat
+                praesentium minus quia. Suscipit, praesentium. Rem voluptatibus ipsa maxime aperiam, doloremque dolor
+                quidem
+                odio officia enim beatae deserunt optio hic quas nemo saepe, doloribus eum. Iure dolores provident
+                aliquam?
+                Commodi facere ipsa illo odit enim, natus asperiores dolores reiciendis? Deserunt labore suscipit alias
+                nesciunt ipsa, voluptatem sunt nostrum corporis unde similique vel officiis quo. Explicabo unde quaerat
+                nulla nemo perferendis facere inventore dolores, asperiores id? Doloribus dolorem ratione molestias rem!
+                Cupiditate, cum? Nihil, numquam suscipit facere est ad, architecto recusandae debitis fugit doloremque
+                nemo
+                eveniet officia dicta, odit eligendi error illum voluptatibus consectetur maiores nostrum labore.
+                Necessitatibus ducimus velit optio aperiam temporibus vel sunt, dolorum consectetur sapiente tempore!
+                Dolores iste corrupti atque nihil illo adipisci? Repellat excepturi quidem commodi officiis, optio
+                debitis
+                similique nesciunt necessitatibus illo voluptates dicta at aliquam sapiente impedit cum non sunt aut
+                perferendis modi tempore. Numquam enim consectetur voluptatibus assumenda vero maxime sapiente natus.
+                Quod
+                totam doloremque architecto, perferendis eum debitis perspiciatis possimus vero distinctio nostrum sit
+                iure
+                nihil tempore ab saepe error voluptates odit quisquam quis odio quia eius? Officia, itaque explicabo!
+                Accusamus tenetur voluptate culpa minus aperiam impedit, quo distinctio modi quidem dicta tempore!
+                Excepturi
+                molestiae suscipit iure voluptate sequi, maxime velit magnam dignissimos, expedita ullam doloribus
+                reprehenderit id provident culpa consequatur autem alias aperiam consequuntur explicabo nulla placeat!
+                Earum
+                rem praesentium necessitatibus, unde tempore sit ducimus dolorem porro saepe eos laboriosam maxime
+                sapiente,
+                consectetur quae cupiditate fugit delectus magni adipisci repellendus molestias dolore placeat? Fugiat
+                iure
+                repudiandae quos delectus tenetur reiciendis deleniti nisi corporis quae, blanditiis dignissimos. Earum
+                modi
+                quod adipisci officia quaerat eius laudantium fuga ipsam, perferendis consectetur accusamus error,
+                voluptate
+                cupiditate recusandae maxime, quidem alias minima quam quisquam eum amet eos incidunt dicta?
+                Voluptatibus
+                dicta laudantium optio quis libero quas expedita fuga quaerat odio veniam repudiandae minus repellendus
+                cupiditate quia, distinctio doloremque reprehenderit repellat aperiam nam itaque odit perferendis.
+                Deleniti
+                quidem blanditiis doloribus quos commodi maxime dignissimos reiciendis et sint possimus est architecto,
+                quia
+                totam vitae error, consequatur, explicabo distinctio reprehenderit praesentium eum nulla aperiam harum!
+                Ex
+                nam, inventore iste, excepturi repellendus officia facilis ea itaque quia, nihil molestias commodi odio
+                aut
+                delectus error. Et dolor magnam similique fugiat pariatur? Minus repellat quibusdam sed numquam
+                consequatur,
+                praesentium officiis! Officiis hic amet possimus eaque repudiandae tenetur deleniti, expedita dolorem
+                dolore
+                obcaecati, nihil, ipsum ducimus accusamus ab illo tempore cum perspiciatis? Cupiditate eveniet quo aut
+                error
+                numquam tempora voluptate! Ipsum iste labore hic, quibusdam tenetur iusto cumque cum blanditiis
+                necessitatibus eum asperiores suscipit obcaecati delectus id deserunt minima odit nobis sapiente
+                voluptatum
+                unde ex quisquam quidem. At nihil ut quas eos omnis exercitationem, consequatur ipsa nemo, accusantium,
+                consequuntur nisi? Vitae, atque. Eligendi, perferendis? Enim, quod architecto! Dolores, veritatis
+                ducimus.
+            </div>
+            <!-- 右邊嘗試使用表單 -->
+            <div class="form">
+                <form action="">
+                    <fieldset>
+                        <legend>表單輸入</legend>
+                        <label for="textInput">可輸入文字</label>
+                        <br>
+                        <textarea name="textInput" id="textInput" cols="50" rows="20"></textarea>
+                        <br>
+                        <input type="submit" value="submit">
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="fixed">
+        <a href="#">
+            <img src="./photo/top.png" alt="">
+        </a>
+    </div>
+</body>
+
+</html>
