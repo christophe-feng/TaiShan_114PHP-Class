@@ -81,6 +81,11 @@ div {
     height: 25px;
     /* background-color: green; */
     border-right: 0px;
+    font-family: '標楷體';
+    color: #000000;
+    text-align: center;
+    font-size: 16px;
+    padding: 2px;
 }
 
 .right {
@@ -112,4 +117,13 @@ div {
     /* background-color: goldenrod; */
     margin: auto;
     border-top: 0px;
+    font-family: '標楷體';
+    color: #000000;
+    text-align: center;
+    font-size: 16px;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
 }
