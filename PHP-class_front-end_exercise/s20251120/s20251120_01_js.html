@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: cornflowerblue;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .btn-box {
+            width: 300px;
+            height: 100px;
+            background-color: orangered;
+            margin: auto;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+
+    <div class="btn-box">
+
+    </div>
+
+    <!-- js寫在body上方 -->
+    <script>
+        // 1.bind
+        // 電視
+        // 遙控器
+        
+        // 電視
+        let myTV = document.querySelector('.box');
+        // 遙控器
+        let myBtn = document.querySelector('.btn-box');
+
+        console.log('hello js');
+        console.log('myTv', myTv);
+        console.log('myBtn', myBtn);
+
+        // 2.action
+        // 遙控器.動作('按一次','產生動作')
+        myBtn.addEventListener('click', function () {
+            console.log('myBtn ok');
+        });
+    </script>
+</body>
+
+</html>
