@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+}
+
+.top {
+    width: 1024px;
+    height: 65px;
+    /* background-color: peachpuff; */
+    margin: auto;
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+
+.top img {
+    width: 994px;
+    height: 60px;
+}
+
+.middle {
+    width: 1024px;
+    height: calc(768px - 65px - 20px);
+    /* background-color: lightslategrey; */
+    margin: auto;
+    display: flex;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.left {
+    width: 215px;
+    height: 100%;
+    /* background-color: darkmagenta; */
+    border-right: 1px solid black;
+}
+
+.menu {
+    width: 100%;
+    height: calc(100% - 25px);
+    /* background-color: gold; */
+    border-bottom: 1px solid black;
+    font-family: '標楷體';
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    width: 100px;
+    height: 35px;
+    border-bottom: 1px solid black;
+    padding-top: 3px;
+    font-size: 24px;
+    color: #FF00FF;
+}
+
+.club {
+    width: 180px;
+    height: 25px;
+    font-size: 16px;
+    margin-top: 10px;
+    padding-top: 2px;
+    background-image: url(../images/menu1.png);
+}
+
+.club:hover {
+    background-image: url(../images/menu2.png);
+}
+
+.update {
+    width: 100%;
+    height: 25px;
+    /* background-color: lightblue; */
+    font-family: '標楷體';
+    color: #000000;
+    text-align: center;
+    font-size: 16px;
+    padding-top: 3px;
+}
+
+.right {
+    width: calc(100% - 215px);
+    height: 100%;
+    /* background-color: hotpink; */
+}
+
+.marquee {
+    width: 100%;
+    height: 29px;
+    /* background-color: green; */
+    border-bottom : 1px solid black;
+}
+
+marquee {
+    font-family: '標楷體';
+    font-size: 24px;
+    color: #0000FF;
+}
+
+.content {
+    width: 100%;
+    height: calc(100% - 29px);
+    /* background-color: deepskyblue; */
+}
+
+.footer {
+    width: 1024px;
+    height: 20px;
+    /* background-color: mediumpurple; */
+    margin: auto;
+    border: 1px solid black;
+    font-family: '標楷體';
+    color: #000000;
+    text-align: center;
+    font-size: 16px;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+}
