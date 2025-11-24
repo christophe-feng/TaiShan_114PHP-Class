@@ -3,55 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>萬年曆作業</title>
+    <title>月曆製作</title>
     <style>
-        body {
-            display: flex;
-        }
-
-        .sonnet {
-            width: 35%;
-            height: 90vh;
-        }
-
-        .calendar {
-            width: 65%;
-            height: 90vh;
-        }
-
-        .container{
-            width:500px;
-            margin:auto;
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:center;
-        }
-        .container div{
-            display:inline-block;
-            width:calc(500px / 7);
-            height:40px;
-            line-height:40px;
-            text-align: center;
-            border:1px solid #999;
-            box-sizing:border-box;
-            margin:-1px 0 0 -1px;
-        }
-        h2{
-            display:flex;
-            justify-content:space-between;
-            width: 500px;
-            padding:0 10px;
-            margin: auto;
-            box-sizing:border-box;
-        }
-    </style>
+table{
+    border-collapse:collapse;
+    max-width:70%;
+    min-width:500px;
+    margin:10px auto;
+    font-size:16px;
+}    
+table td,table th{
+    border:1px solid #999;
+    padding:5px 10px;
+    text-align:center;
+}
+table th{
+    background:skyblue;
+}
+</style>
 </head>
 <body>
-    <div class="sonnet">
 
-    </div>
-    <div class="calendar">
-        <?php 
+<h2>月曆製作提示</h2>
+<?php 
 $today=strtotime("now");
 $targetDay=(isset($_GET['date']))?$_GET['date']:date("Y-m-d");
 //$targetDay="2025-1-01";
@@ -68,8 +42,55 @@ $prev=date("Y-m-d",strtotime("-1 month",$Ttime));
 $next=date("Y-m-d",strtotime("+1 month",$Ttime));
 
 ?>
-        
-        <?php 
+<table>
+    <tr>
+        <td>今天是:<?=date("Y-m-d");?></td>
+        <td>月份:<?=$month;?></td>
+        <td>本月第一天:<?=$firstDayMonth;?></td>
+    </tr>
+    <tr>
+        <td>這個月1號是星期:<?=$firstWeek;?></td>
+        <td>這個月有 <?=$monthDays;?> 天</td>
+        <td>這個月有 <?=$monthWeeks;?> 周</td>
+    </tr>
+    <tr>
+        <td>這個月曆第一格的日期為:<?=date("Y-m-d",$tableFirstDay);?></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+
+<style>
+
+
+.container{
+    width:500px;
+    margin:auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+.container div{
+    display:inline-block;
+    width:calc(500px / 7);
+    height:40px;
+    line-height:40px;
+    text-align: center;
+    border:1px solid #999;
+    box-sizing:border-box;
+    margin:-1px 0 0 -1px;
+}
+h2{
+    display:flex;
+    justify-content:space-between;
+    width: 500px;
+    padding:0 10px;
+    margin: auto;
+    box-sizing:border-box;
+}
+</style>
+<?php 
 //萬年曆製作
 //開始畫月曆
 echo "<h2 style='text-align:center'>";
@@ -110,6 +131,5 @@ for($i=0;$i<42;$i++){
 
 echo "</div>";
 ?>
-    </div>
 </body>
 </html>
