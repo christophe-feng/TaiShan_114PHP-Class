@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .bg-vert {
+            background-color: green;
+        }
+
+        .stop {
+            margin-top: 20px;
+            width: 200px;
+            height: 50px;
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="box stop"></div>
+
+    <script>
+
+        // 1. bind 
+        let box = document.querySelector('.box');
+        let stopBtn = document.querySelector('.stop');
+        let tmpTimer = null;
+        // console.log('box', box);
+
+        // 2.action
+        // 一次變色
+        box.addEventListener('click', function () {
+            setTimeout(function () {
+                box.setAttribute('class', 'box bg-vert');
+            }, 3000)
+        })
+
+        // 連續多次變色
+        // flag
+        setInterval(function () {
+            let colorFlag = 0;
+            tmpTimer = setInterval(function () {
+                if (colorFlag == 0) {
+                    box.setAttribute('class', 'box bg-vert');
+                    colorFlag = 1;
+                } else {
+                    box.setAttribute('class', 'box');
+                    colorFlag = 0;
+                }
+                console.log('colorFlag', colorFlag);
+            }, 1000);
+        });
+
+        stopBtn.addEventListener('click', function () {
+            // 停止
+            clearInterval(tmpTimer);
+        });
+    </script>
+</body>
+
+</html>

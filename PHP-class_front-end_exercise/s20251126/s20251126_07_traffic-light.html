@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .traffic-light-display {
+            width: 500px;
+            height: 500px;
+            background-color: lavenderblush;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+        .traffic-light {
+            width: 300px;
+            height: 100px;
+            margin: auto;
+            margin-top: 20px;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .traffic-light-red {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            margin: auto;
+        }
+
+        .traffic-light-yellow {
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            margin: auto;
+        }
+
+        .traffic-light-green {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="traffic-light-display"></div>
+    <div class="traffic-light">
+        <div class="traffic-light-red"></div>
+        <div class="traffic-light-yellow"></div>
+        <div class="traffic-light-green"></div>
+    </div>
+
+    <script>
+        let redLight = document.querySelector('.traffic-light-red');
+        let yellowLight = document.querySelector('.traffic-light-yellow');
+        let greenLight = document.querySelector('.traffic-light-green');
+        let display = document.querySelector('.traffic-light-display');
+
+        console.log('display', display);
+        console.log('redLight', redLight);
+        console.log('yellowLight', yellowLight);
+        console.log('greenLight', greenLight);
+
+        redLight.addEventListener('click', function () {
+            display.style.backgroundColor = 'red';
+        });
+
+        yellowLight.addEventListener('click', function () {
+            display.style.backgroundColor = 'yellow';
+        });
+
+        greenLight.addEventListener('click', function () {
+            display.style.backgroundColor = 'green';
+        });
+
+        display.addEventListener('click', function () {
+            console.log('this', this);
+            this.style.backgroundColor = 'lavenderblush';
+        });
+    </script>
+</body>
+
+</html>

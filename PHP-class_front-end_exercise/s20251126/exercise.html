@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搶票練習 | Ticket Booking Practice</title>
+    <style>
+        :root {
+            --primary-color: #6200EA;
+            /* Deep Purple */
+            --accent-color: #00E5FF;
+            /* Cyan Accent */
+            --bg-color: #121212;
+            /* Dark Background */
+            --text-color: #FFFFFF;
+            --danger-color: #FF1744;
+            --success-color: #00C853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, #311B92, #6200EA);
+            box-shadow: 0 4px 15px rgba(98, 0, 234, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        /* Event Card */
+        .event-card {
+            background-color: #1E1E1E;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .poster-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .poster-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .poster-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .event-details {
+            padding: 1.5rem;
+        }
+
+        .event-title {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .event-info {
+            color: #AAA;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* Booking Zone */
+        .booking-zone {
+            background-color: #2C2C2C;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--danger-color);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(255, 23, 68, 0.3);
+        }
+
+        .status-message {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            min-height: 1.5em;
+        }
+
+        .btn-buy {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: 0 0 15px rgba(98, 0, 234, 0.4);
+            text-transform: uppercase;
+        }
+
+        .btn-buy:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .btn-buy:active:not(:disabled) {
+            transform: scale(0.95);
+            background-color: #00E5FF;
+            color: #000;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-control {
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-control:hover {
+            background-color: var(--accent-color);
+            color: #000;
+        }
+
+        /* Results */
+        .result-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .result-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .result-box {
+            background-color: #1E1E1E;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--accent-color);
+            max-width: 90%;
+            width: 400px;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .result-overlay.active .result-box {
+            transform: scale(1);
+        }
+
+        .result-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-time {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .success {
+            color: var(--success-color);
+        }
+
+        .fail {
+            color: var(--danger-color);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .timer-display {
+                font-size: 3rem;
+            }
+
+            .btn-buy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Ticket Master Practice</h1>
+    </header>
+
+    <main>
+        <div class="event-card">
+            <div class="poster-container">
+                <img src="poster.png" alt="Super Star World Tour 2025">
+            </div>
+            <div class="event-details">
+                <h2 class="event-title">SUPER STAR WORLD TOUR 2025</h2>
+                <p class="event-info">📅 2025.12.31 (Wed) 19:30 | 📍 Taipei Dome</p>
+                <p>準備好你的手指，這將是年度最激烈的搶票戰爭！</p>
+            </div>
+        </div>
+
+        <div class="booking-zone">
+            <div class="status-message" id="statusMsg">距離開賣還有...</div>
+            <div class="timer-display" id="timer">00:05.00</div>
+            <button class="btn-buy" id="buyBtn" disabled>立即購票</button>
+        </div>
+
+        <div class="controls">
+            <button class="btn-control" onclick="startPractice(3)">練習 3秒倒數</button>
+            <button class="btn-control" onclick="startPractice(5)">練習 5秒倒數</button>
+            <button class="btn-control" onclick="startPractice(10)">練習 10秒倒數</button>
+            <button class="btn-control" onclick="startPractice('random')">隨機倒數</button>
+        </div>
+    </main>
+
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-box">
+            <h2 class="result-title" id="resultTitle">搶票成功!</h2>
+            <p>反應時間</p>
+            <div class="result-time" id="resultTime">0.123s</div>
+            <button class="btn-control" onclick="closeResult()">再試一次</button>
+        </div>
+    </div>
+
+    <script>
+        const timerDisplay = document.getElementById('timer');
+        const buyBtn = document.getElementById('buyBtn');
+        const statusMsg = document.getElementById('statusMsg');
+        const resultOverlay = document.getElementById('resultOverlay');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultTime = document.getElementById('resultTime');
+
+        let countdownInterval;
+        let startTime;
+        let isPracticeRunning = false;
+        let targetTime;
+
+        // Initialize
+        resetTimer(5);
+
+        function resetTimer(seconds) {
+            clearInterval(countdownInterval);
+            isPracticeRunning = false;
+            buyBtn.disabled = true;
+            buyBtn.textContent = "立即購票";
+            buyBtn.style.backgroundColor = "";
+
+            let displaySec = Math.floor(seconds);
+            let displayMs = (seconds % 1).toFixed(2).substring(2);
+            timerDisplay.textContent = `00:${displaySec.toString().padStart(2, '0')}.${displayMs}`;
+            timerDisplay.style.color = "var(--danger-color)";
+            statusMsg.textContent = "請選擇倒數模式開始練習";
+        }
+
+        function startPractice(mode) {
+            if (isPracticeRunning) clearInterval(countdownInterval);
+            isPracticeRunning = true;
+            buyBtn.disabled = true;
+            statusMsg.textContent = "準備搶票...";
+
+            let seconds;
+            if (mode === 'random') {
+                seconds = Math.floor(Math.random() * 5) + 3; // 3 to 8 seconds
+            } else {
+                seconds = mode;
+            }
+
+            // Set target time
+            const now = Date.now();
+            targetTime = now + (seconds * 1000);
+
+            updateTimer();
+            countdownInterval = requestAnimationFrame(loop);
+        }
+
+        function loop() {
+            if (!isPracticeRunning) return;
+            updateTimer();
+            countdownInterval = requestAnimationFrame(loop);
+        }
+
+        function updateTimer() {
+            const now = Date.now();
+            const diff = targetTime - now;
+
+            if (diff <= 0) {
+                // Time's up!
+                timerDisplay.textContent = "00:00.00";
+                timerDisplay.style.color = "var(--success-color)";
+                statusMsg.textContent = "開賣啦！快點擊！";
+                enableButton();
+                isPracticeRunning = false;
+                cancelAnimationFrame(countdownInterval);
+                return;
+            }
+
+            const sec = Math.floor(diff / 1000);
+            const ms = Math.floor((diff % 1000) / 10); // 2 digits
+            timerDisplay.textContent = `00:${sec.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')}`;
+        }
+
+        function enableButton() {
+            buyBtn.disabled = false;
+            startTime = Date.now(); // Record the exact moment button became active
+        }
+
+        buyBtn.addEventListener('click', () => {
+            const clickTime = Date.now();
+            const reactionTime = (clickTime - startTime) / 1000;
+
+            showResult(reactionTime);
+        });
+
+        function showResult(time) {
+            resultOverlay.classList.add('active');
+            resultTime.textContent = `${time.toFixed(3)}s`;
+
+            if (time < 0.3) {
+                resultTitle.textContent = "搶票成功！🏆";
+                resultTitle.className = "result-title success";
+                resultTitle.innerHTML += "<br><span style='font-size:1rem; color:#888'>神之手速！</span>";
+            } else if (time < 0.6) {
+                resultTitle.textContent = "搶票成功！🎫";
+                resultTitle.className = "result-title success";
+            } else {
+                resultTitle.textContent = "搶票失敗... 🐢";
+                resultTitle.className = "result-title fail";
+                resultTitle.innerHTML += "<br><span style='font-size:1rem; color:#888'>票被搶光了...</span>";
+            }
+        }
+
+        function closeResult() {
+            resultOverlay.classList.remove('active');
+            resetTimer(5);
+        }
+    </script>
+</body>
+
+</html>
