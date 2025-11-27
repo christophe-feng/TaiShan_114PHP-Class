@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 80%;
+            /* height: 40vh; */
+            /* background-color: wheat; */
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .form-box {
+            width: 300px;
+            height: 100%;
+            background-color: lightslategrey;
+            margin: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-top: 20px;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        .result {
+            width: 300px;
+            height: 100px;
+            background-color: lightgreen;
+            margin: auto;
+            margin-top: 20px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 24px;
+            border-radius: 20px;
+        }
+
+        .text-red {
+            color: orangered;
+        }
+
+        .text-blue {
+            color: dodgerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-box">
+            <form action="">
+                <p>
+                    <label for="name">姓名</label>
+                    <input type="text" name="name" id="name" value="">
+                </p>
+                <p>
+                    <label for="score">分數</label>
+                    <input type="text" name="score" id="score" value="">
+                </p>
+                <p>
+                    <input type="submit" value="送出" id="submitBtn">
+                </p>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="result">
+            <span id="resultSpan">Pass ?</span>
+        </div>
+    </div>
+
+    <script>
+        // 1.bind
+        let nameInput = document.getElementById('name');
+        let scoreInput = document.getElementById('score');
+        let submitBtn = document.getElementById('submitBtn');
+        let resultSpan = document.getElementById('resultSpan');
+        console.log('nameInput',nameInput);
+        console.log('scoreInput',scoreInput);
+        console.log('submitBtn',submitBtn);
+        console.log('resultSpan',resultSpan);
+
+        // 2.action
+        // submitBtn 點擊事件
+        submitBtn.addEventListener('click', function (e) {
+            // 阻止表單預設行為
+            e.preventDefault();
+
+            // 懶人包 數字 轉型
+            let tmpName = nameInput.value;
+            let tmpScore = Number(scoreInput.value);
+            let resultText = "";
+
+            console.log('tmpName', tmpName);
+            console.log('tmpScore', tmpScore);
+            // typeof
+            console.log('tmpName typeof', typeof (tmpName));
+            console.log('tmpScore typeof', typeof (tmpScore));
+
+            if (tmpScore >= 60) {
+                resultText = "恭喜通過";
+                resultSpan.setAttribute('class', 'text-blue');
+            } else {
+                resultText = "再撐一下下";
+                resultSpan.setAttribute('class', 'text-red');
+            }
+
+            resultSpan.innerText = tmpName + ' ' + tmpScore + '分 ' + resultText;
+
+            // inner value
+            // span box innerText
+
+        });
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="myTitle">My title</title>
+    <style>
+        .bg-blue {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="myH1">
+        A heading
+    </h1>
+
+    <a href="" id="myA">Link text</a>
+
+    <script>
+        // 1.bind
+        let myTitle = document.getElementById('myTitle');
+        let myH1 = document.getElementById('myH1');
+        let myA = document.getElementById('myA');
+
+        // console.log('document',document);
+        console.log('myTitle',myTitle);
+        console.log('myH1',myH1);
+        console.log('myA',myA);
+
+        // 2.action
+        myTitle.innerText = '這是title的新內容';
+        myTitle.setAttribute('class', 'bg-blue');
+
+        myH1.innerText = '這是h1的新內容';
+        myH1.setAttribute('class', 'bg-blue');
+        
+        myA.innerText = '這是a的新內容';
+        myA.setAttribute('class', 'bg-blue');
+    </script>
+</body>
+</html>

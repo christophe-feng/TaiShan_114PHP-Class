@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 80%;
+            /* height: 60vh; */
+            /* background-color: lightblue; */
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .form-box {
+            width: 50%;
+            background-color: lightpink;
+            margin: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        .label-text {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h3>1.財務安全</h3>
+            <table>
+                <tr>
+                    <td class="label-text">
+                        <label for="house">1.住 買 / 租 / 月</label>
+                    </td>
+                    <td>
+                        <input type="text" name="house" id="house" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-text">
+                        <label for="food">2.生活 食物/生活用品</label>
+                    </td>
+                    <td>
+                        <input type="text" name="food" id="food" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-text">
+                        <label for="utilities">1.3 公共事業費 水 電費 網路 電話費</label>
+                    </td>
+                    <td>
+                        <input type="text" name="utilities" id="utilities" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-text">
+                        <label for="transportation">1.4 交通費 </label>
+                    </td>
+                    <td>
+                        <input type="text" name="transportation" id="transportation" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-text">
+                        <label for="insurance">1.5 基本保險</label>
+                    </td>
+                    <td>
+                        <input type="text" name="insurance" id="insurance" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <button id="calcBtn">計算總額</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="result-box">
+            <h3>1.財務安全</h3>
+            <p>每月支出總計：<span id="monthly-total"></span></p>
+            <p>每年支出總計：<span id="annual-total"></span></p>
+            <p>10年支出總計：<span id="decade-total"></span></p>
+            <h3>2.財務活力 娛樂費 治裝費 </h3>
+            <h3>3.財務獨立 奢侈品 捐贈</h3>
+            <h3>4.財務自由</h3>
+            <h3>5.絕對財務自由</h3>
+
+        </div>
+    </div>
+
+    <script>
+        // 1.bind
+        let houseInput = document.getElementById('house');
+        let foodInput = document.getElementById('food');
+        let utilitiesInput = document.getElementById('utilities');
+        let transportationInput = document.getElementById('transportation');
+        let insuranceInput = document.getElementById('insurance');
+
+
+        let monthlyTotalSpan = document.getElementById('monthly-total');
+        let annualTotalSpan = document.getElementById('annual-total');
+        let decadeTotalSpan = document.getElementById('decade-total');
+
+        let calcBtn = document.getElementById('calcBtn');
+
+        // 2.action
+
+        // setDefaultValue
+        houseInput.value = 6000;
+        foodInput.value = 10000;
+        utilitiesInput.value = 1500;
+        transportationInput.value = 1500;
+        insuranceInput.value = 1000;
+
+        calcBtn.addEventListener('click', function () {
+            let tmpHouse = Number(houseInput.value);
+            let tmpFood = Number(foodInput.value);
+            let tmpUtilities = Number(utilitiesInput.value);
+            let tmpTransportation = Number(transportationInput.value);
+            let tmpInsurance = Number(insuranceInput.value);
+            let monthlyTotal = tmpHouse + tmpFood + tmpUtilities + tmpTransportation + tmpInsurance;
+            let annualTotal = monthlyTotal * 12;
+            monthlyTotalSpan.innerText = monthlyTotal;
+            annualTotalSpan.innerText = annualTotal;
+            let decadeTotal = annualTotal * 10;
+            decadeTotalSpan.innerText = decadeTotal;
+        });
+    </script>
+</body>
+
+</html>

@@ -1,270 +1,157 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>萬年曆作業 - A Calendar of Sonnets</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #c0392b;
-            --bg-color: #fdfbf7;
-            --text-color: #333;
-            --light-gray: #e0e0e0;
-            --hover-bg: #ececec;
-            --today-bg: #fff3cd;
-            --weekend-color: #e74c3c;
-        }
-
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-
+        
         body {
             display: flex;
-            font-family: 'Roboto', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Georgia', serif;
         }
 
-        /* Sonnet Section */
         .sonnet {
-            width: 40%;
-            height: 100%;
-            padding: 40px;
+            width: 35%;
+            height: 100vh;
+            padding: 30px;
+            box-sizing: border-box;
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
-            z-index: 10;
+            overflow-y: auto;
         }
-
+        
         .sonnet::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
-            backdrop-filter: blur(2px);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
-
+        
         .sonnet-content {
             position: relative;
             z-index: 2;
             color: white;
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            max-height: 90vh;
-            overflow-y: auto;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
-
+        
         .sonnet-content h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 24px;
+            margin-bottom: 20px;
             text-align: center;
-            font-style: italic;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 15px;
         }
-
+        
         .sonnet-content .poem {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-size: 16px;
             line-height: 1.8;
             white-space: pre-line;
-            text-align: center;
         }
 
-        /* Calendar Section */
         .calendar {
-            width: 60%;
-            height: 100%;
-            padding: 40px;
+            width: 65%;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
             overflow-y: auto;
+            background: #f5f5f5;
+        }
+
+        .container{
+            width: 500px;
+            margin: auto;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
             background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
-
-        .calendar-wrapper {
-            width: 100%;
-            max-width: 800px;
+        
+        .container div{
+            display: inline-block;
+            width: calc(500px / 7);
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid #999;
+            box-sizing: border-box;
+            margin: -1px 0 0 -1px;
         }
-
-        /* Navigation */
+        
         .year-nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 0 10px;
-        }
-
-        .year-nav h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: var(--primary-color);
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .month-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 10px 0;
-        }
-
-        .month-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--primary-color);
-            font-weight: 400;
-        }
-
-        .nav-btn {
-            text-decoration: none;
-            color: var(--primary-color);
-            padding: 8px 20px;
-            border: 1px solid var(--light-gray);
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        /* Grid */
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            padding: 30px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.02);
-        }
-
-        .day-cell {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            border-radius: 50%;
-            cursor: default;
-            transition: all 0.2s;
-            position: relative;
-            color: var(--text-color);
+            align-items: center;
+            gap: 30px;
+            margin: 20px auto;
+            width: 500px;
         }
-
-        .day-header {
-            font-weight: 500;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--light-gray);
-            border-radius: 0;
-            aspect-ratio: auto;
-            padding-bottom: 15px;
-            margin-bottom: 10px;
+        
+        .year-nav h1 {
+            font-size: 32px;
+            color: #333;
         }
-
-        .day-cell:not(.day-header):not(.empty):hover {
-            background-color: var(--hover-bg);
-            transform: scale(1.1);
+        
+        .year-nav a {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
         }
-
-        .day-cell.today {
-            background-color: var(--primary-color) !important;
-            color: white !important;
-            box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+        
+        .year-nav a:hover {
+            background: #45a049;
+        }
+        
+        h2{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 500px;
+            padding: 15px 10px;
+            margin: auto;
+            box-sizing: border-box;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h2 a {
+            padding: 8px 16px;
+            background: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        h2 a:hover {
+            background: #0b7dda;
+        }
+        
+        h2 div {
+            font-size: 24px;
             font-weight: bold;
         }
-
-        .day-cell.weekend {
-            color: var(--weekend-color);
-        }
-
-        .day-cell.weekend.today {
-            color: white !important;
-        }
-
-        .day-cell.other-month {
-            color: #ccc;
-            opacity: 0.5;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #999;
-        }
-
-        @media (max-width: 900px) {
-            body {
-                flex-direction: column;
-                overflow: auto;
-            }
-
-            .sonnet,
-            .calendar {
-                width: 100%;
-                height: auto;
-                min-height: 50vh;
-            }
-
-            .sonnet {
-                position: sticky;
-                top: 0;
-            }
+        
+        .today {
+            background: #ffffcc !important;
+            font-weight: bold;
         }
     </style>
 </head>
-
 <body>
-    <?php
+    <?php 
     // 十四行詩內容（Helen Hunt Jackson的A Calendar of Sonnets）
     $sonnets = [
         1 => [
@@ -491,7 +378,7 @@ O\'er the brief noontide, fresh surprises find.',
     $Ttime = strtotime($targetDay);
     $month = date("m", $Ttime);
     $year = date("Y", $Ttime);
-
+    
     $firstDayMonth = date("Y-m-1", $Ttime);
     $firstWeek = date("w", strtotime($firstDayMonth));
     $monthDays = date("t", $Ttime);
@@ -502,67 +389,69 @@ O\'er the brief noontide, fresh surprises find.',
     $next = date("Y-m-d", strtotime("+1 month", $Ttime));
     $prevYear = date("Y-m-d", strtotime("-1 year", $Ttime));
     $nextYear = date("Y-m-d", strtotime("+1 year", $Ttime));
-
+    
     $monthInt = intval($month);
     ?>
-
+    
     <div class="sonnet" style="background-image: url('<?php echo $sonnets[$monthInt]['image']; ?>');">
         <div class="sonnet-content">
             <h3><?php echo $sonnets[$monthInt]['title']; ?></h3>
             <div class="poem"><?php echo $sonnets[$monthInt]['poem']; ?></div>
         </div>
     </div>
-
+    
     <div class="calendar">
-        <div class="calendar-wrapper">
-            <div class="year-nav">
-                <a href='?date=<?php echo $prevYear; ?>' class="nav-btn">◄ 前一年</a>
-                <h1><?php echo $year; ?> 年</h1>
-                <a href='?date=<?php echo $nextYear; ?>' class="nav-btn">後一年 ►</a>
-            </div>
-
-            <div class="month-nav">
-                <a href='?date=<?php echo $prev; ?>' class="nav-btn">◄ 上一月</a>
-                <div class="month-title"><?php echo $month; ?> 月</div>
-                <a href='?date=<?php echo $next; ?>' class="nav-btn">下一月 ►</a>
-            </div>
-
-            <div class='calendar-grid'>
-                <div class="day-cell day-header">日</div>
-                <div class="day-cell day-header">一</div>
-                <div class="day-cell day-header">二</div>
-                <div class="day-cell day-header">三</div>
-                <div class="day-cell day-header">四</div>
-                <div class="day-cell day-header">五</div>
-                <div class="day-cell day-header">六</div>
-
-                <?php
-                for ($i = 0; $i < 42; $i++) {
-                    $datetime = strtotime("+$i days", $tableFirstDay);
-                    $isToday = (date("Y-m-d", $datetime) == date("Y-m-d", $today));
-                    $isWeekend = (date("w", $datetime) == 0 || date("w", $datetime) == 6);
-                    $isCurrentMonth = ($month == date("m", $datetime));
-
-                    $class = "day-cell";
-
-                    if ($isToday) {
-                        $class .= " today";
-                    }
-                    if ($isWeekend) {
-                        $class .= " weekend";
-                    }
-                    if (!$isCurrentMonth) {
-                        $class .= " other-month";
-                    }
-
-                    echo "<div class='$class'>";
-                    echo date("d", $datetime);
-                    echo "</div>";
-                }
-                ?>
-            </div>
+        <div class="year-nav">
+            <a href='?date=<?php echo $prevYear; ?>'>◄ 前一年</a>
+            <h1><?php echo $year; ?> 年</h1>
+            <a href='?date=<?php echo $nextYear; ?>'>後一年 ►</a>
         </div>
+        
+        <?php 
+        echo "<h2>";
+        echo "<a href='?date=$prev'>◄ 上一月</a>";
+        echo "<div>" . $month . " 月</div>";
+        echo "<a href='?date=$next'>下一月 ►</a>";
+        echo "</h2>";
+
+        echo "<div class='container'>";
+        echo "<div style='background:#e3f2fd;font-weight:bold;'>日</div>";
+        echo "<div style='background:#e3f2fd;font-weight:bold;'>一</div>";
+        echo "<div style='background:#e3f2fd;font-weight:bold;'>二</div>";
+        echo "<div style='background:#e3f2fd;font-weight:bold;'>三</div>";
+        echo "<div style='background:#e3f2fd;font-weight:bold;'>四</div>";
+        echo "<div style='background:#e3f2fd;font-weight:bold;'>五</div>";
+        echo "<div style='background:#e3f2fd;font-weight:bold;'>六</div>";
+
+        for($i = 0; $i < 42; $i++){
+            $datetime = strtotime("+$i days", $tableFirstDay);
+            $isToday = (date("Y-m-d", $datetime) == date("Y-m-d", $today));
+            $isWeekend = (date("w", $datetime) == 0 || date("w", $datetime) == 6);
+            $isCurrentMonth = ($month == date("m", $datetime));
+            
+            $style = "";
+            $class = "";
+            
+            if($isToday) {
+                $class = "today";
+            } elseif($isWeekend) {
+                $style = "background:#ffe4e1;";
+            }
+            
+            echo "<div class='$class' style='$style'>";
+            
+            if(!$isCurrentMonth){
+                echo "<span style='color:#ccc'>";
+            } else {
+                echo "<span>";
+            }
+            echo date("d", $datetime);
+            echo "</span>";
+            echo "</div>";
+        }
+
+        echo "</div>";
+        ?>
     </div>
 </body>
-
 </html>

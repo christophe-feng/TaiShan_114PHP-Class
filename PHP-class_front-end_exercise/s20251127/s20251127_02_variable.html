@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+    <script>
+        // 不推薦，古老用法
+        x = 10;
+        var y = 20;
+        console.log('x',x);
+        console.log('y',y);
+
+        // 推薦，現代用法
+        let a = 30;
+        a = 100;
+        console.log('a',a);
+
+        const bConst = 50;
+        // bConst = 200;
+        console.log('bCon',bConst);
+
+        // 1.bind
+        const box = document.querySelector('.box');
+
+        // box = "hello";
+        // console.log('box',box);
+
+        // 2.action
+        box.addEventListener('click', function () {
+            box.setAttribute('class', 'box bg-pink');
+        });
+    </script>
+</body>
+</html>
