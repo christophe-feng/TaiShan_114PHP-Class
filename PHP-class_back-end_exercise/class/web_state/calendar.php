@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>萬年曆作業 - A Calendar of Sonnets</title>
+    <title>Perpetual Calendar - A Calendar of Sonnets</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -65,7 +65,7 @@
             color: white;
             max-width: 600px;
             background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
+            padding: 20px;
             border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -86,16 +86,27 @@
         .sonnet-content .poem {
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.5;
             white-space: pre-line;
-            text-align: center;
+            text-align: left;
+        }
+
+        /* Author Information */
+        .sonnet-footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: right;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
         }
 
         /* Calendar Section */
         .calendar {
             width: 60%;
             height: 100%;
-            padding: 40px;
+            padding: 10px 30px;                       
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -107,14 +118,21 @@
             width: 100%;
             max-width: 800px;
         }
-
-        /* Navigation */
+        
+        /* 移除 calendar-header 的 flex 佈局，因為只剩年份導航在裡面 */
+        .calendar-header {
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 0;
+        }
+        
         .year-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding: 0 10px;
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 0;
         }
 
         .year-nav h1 {
@@ -129,7 +147,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
             padding: 10px 0;
         }
 
@@ -140,10 +158,18 @@
             font-weight: 400;
         }
 
+        /* New Wrapper for Today Button */
+        .today-wrapper {
+            display: flex;
+            justify-content: center; /* 置中 */
+            width: 100%;
+            margin: 15px 0 20px 0; /* 在月份導航和日期網格間提供間距 */
+        }
+
         .nav-btn {
             text-decoration: none;
             color: var(--primary-color);
-            padding: 8px 20px;
+            padding: 8px 15px;
             border: 1px solid var(--light-gray);
             border-radius: 30px;
             transition: all 0.3s ease;
@@ -153,6 +179,8 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            cursor: pointer;
+            white-space: nowrap;
         }
 
         .nav-btn:hover {
@@ -160,8 +188,8 @@
             color: white;
             border-color: var(--primary-color);
         }
-
-        /* Grid */
+        
+        /* Grid and Day Cells styles */
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -174,13 +202,13 @@
         }
 
         .day-cell {
-            aspect-ratio: 1;
+            aspect-ratio: 1.75; /* Keeping user's aspect ratio of 1.75 */
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.1rem;
             border-radius: 50%;
-            cursor: default;
+            cursor: pointer;
             transition: all 0.2s;
             position: relative;
             color: var(--text-color);
@@ -197,9 +225,10 @@
             aspect-ratio: auto;
             padding-bottom: 15px;
             margin-bottom: 10px;
+            cursor: default;
         }
 
-        .day-cell:not(.day-header):not(.empty):hover {
+        .day-cell:not(.day-header):not(.other-month):hover {
             background-color: var(--hover-bg);
             transform: scale(1.1);
         }
@@ -215,33 +244,13 @@
             color: var(--weekend-color);
         }
 
-        .day-cell.weekend.today {
-            color: white !important;
-        }
-
         .day-cell.other-month {
             color: #ccc;
             opacity: 0.5;
+            cursor: default;
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #999;
-        }
-
+        /* Mobile Adjustments */
         @media (max-width: 900px) {
             body {
                 flex-direction: column;
@@ -259,13 +268,65 @@
                 position: sticky;
                 top: 0;
             }
+            
+            /* Mobile header cleanup - calendar-header now only contains year-nav */
+            .calendar-header {
+                /* Resetting mobile flex properties */
+                flex-direction: row; 
+                justify-content: flex-start;
+                gap: 0;
+            }
+            
+            .month-nav {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            .month-title {
+                flex-basis: 100%;
+                text-align: center;
+                order: 1;
+            }
+            .month-nav > a {
+                flex: 1 1 45%;
+                margin: 0;
+                order: 2;
+            }
+
+            /* Today button remains centered on mobile due to .today-wrapper */
         }
     </style>
 </head>
 
 <body>
     <?php
-    // 十四行詩內容（Helen Hunt Jackson的A Calendar of Sonnets）
+    // --- 1. 鎖定語言為英文 (en) ---
+    $lang = 'en';
+
+    // 專門用於月份名稱的本地化陣列
+    $localized_months = [
+        'en' => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    ];
+
+    function T($key, $lang)
+    {
+        // 翻譯陣列中只保留英文鍵值
+        $translations = [
+            'en' => [
+                'prev_year' => '◄ Prev Year',
+                'next_year' => 'Next Year ►',
+                'prev_month' => '◄ Prev Month',
+                'next_month' => 'Next Month ►',
+                'back_to_today' => 'Today',
+                'year' => '',
+                'month' => '',
+                'weekdays' => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            ],
+        ];
+        return $translations[$lang][$key] ?? $key;
+    }
+
+    // --- 2. 十四行詩內容 (不變) ---
     $sonnets = [
         1 => [
             'title' => 'January',
@@ -287,6 +348,7 @@ Walk boldly on the white untrodden snows,
 The winter is the winter\'s own release.',
             'image' => 'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800'
         ],
+        // ... (Sonnet 2 to 11 remain the same) ...
         2 => [
             'title' => 'February',
             'poem' => 'Still lie the sheltering snows, undimmed and white;
@@ -321,7 +383,7 @@ Like pregnant mother the sweet earth doth yearn;
 In secret joy makes ready for the spring;
 And hidden, sacred, in her breast doth bear
 Annunciation lilies for the year.',
-            'image' => 'https://images.unsplash.com/photo-1553448926-43ca302b29fd?w=800'
+            'image' => 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800'
         ],
         4 => [
             'title' => 'April',
@@ -357,7 +419,7 @@ No blossom blooms upon thy brightest day
 So subtly sweet as memories which unfold
 In aged hearts which in thy sunshine lie,
 To sun themselves once more before they die.',
-            'image' => 'https://images.unsplash.com/photo-1495107334109-81e5019750c9?w=800'
+            'image' => 'https://images.unsplash.com/photo-1492552181161-62217fc3076d?w=800'
         ],
         6 => [
             'title' => 'June',
@@ -464,7 +526,7 @@ The treachery, at last, too late, is plain;
 Bare are the places where the sweet flowers dwelt.
 What joy sufficient hath November felt?
 What profit from the violet\'s day of pain?',
-            'image' => 'https://images.unsplash.com/photo-1478562672393-6d2b64f7a1f8?w=800'
+            'image' => 'https://images.unsplash.com/photo-1509803874385-db7c23652552?w=800'
         ],
         12 => [
             'title' => 'December',
@@ -486,62 +548,77 @@ O\'er the brief noontide, fresh surprises find.',
         ]
     ];
 
+    // --- 3. 日期與導航邏輯 ---
     $today = strtotime("now");
     $targetDay = (isset($_GET['date'])) ? $_GET['date'] : date("Y-m-d");
     $Ttime = strtotime($targetDay);
-    $month = date("m", $Ttime);
+    
+    $monthInt = date("n", $Ttime); 
     $year = date("Y", $Ttime);
 
     $firstDayMonth = date("Y-m-1", $Ttime);
-    $firstWeek = date("w", strtotime($firstDayMonth));
-    $monthDays = date("t", $Ttime);
-    $monthWeeks = ceil(($monthDays + $firstWeek) / 7);
+    $firstWeek = date("w", strtotime($firstDayMonth)); 
     $tableFirstDay = strtotime("-$firstWeek days", strtotime($firstDayMonth));
 
+    // Nav dates: 
+    $nav_query = ""; 
     $prev = date("Y-m-d", strtotime("-1 month", $Ttime));
     $next = date("Y-m-d", strtotime("+1 month", $Ttime));
     $prevYear = date("Y-m-d", strtotime("-1 year", $Ttime));
     $nextYear = date("Y-m-d", strtotime("+1 year", $Ttime));
+    $today_date = date("Y-m-d", $today);
 
-    $monthInt = intval($month);
+    // Get localized month name (English only):
+    $monthTitle = $localized_months['en'][$monthInt - 1];
+
     ?>
 
     <div class="sonnet" style="background-image: url('<?php echo $sonnets[$monthInt]['image']; ?>');">
         <div class="sonnet-content">
             <h3><?php echo $sonnets[$monthInt]['title']; ?></h3>
             <div class="poem"><?php echo $sonnets[$monthInt]['poem']; ?></div>
+            <div class="sonnet-footer">
+                A Calendar of Sonnets<br>
+                — Helen Hunt Jackson (1886)
+            </div>
         </div>
     </div>
 
     <div class="calendar">
         <div class="calendar-wrapper">
+            
+            <div class="calendar-header">
+                </div>
+
             <div class="year-nav">
-                <a href='?date=<?php echo $prevYear; ?>' class="nav-btn">◄ 前一年</a>
-                <h1><?php echo $year; ?> 年</h1>
-                <a href='?date=<?php echo $nextYear; ?>' class="nav-btn">後一年 ►</a>
+                <a href='?date=<?php echo $prevYear . $nav_query; ?>' class="nav-btn"><?php echo T('prev_year', $lang); ?></a>
+                <h1><?php echo $year; ?><?php echo T('year', $lang); ?></h1>
+                <a href='?date=<?php echo $nextYear . $nav_query; ?>' class="nav-btn"><?php echo T('next_year', $lang); ?></a>
             </div>
 
             <div class="month-nav">
-                <a href='?date=<?php echo $prev; ?>' class="nav-btn">◄ 上一月</a>
-                <div class="month-title"><?php echo $month; ?> 月</div>
-                <a href='?date=<?php echo $next; ?>' class="nav-btn">下一月 ►</a>
+                <a href='?date=<?php echo $prev . $nav_query; ?>' class="nav-btn"><?php echo T('prev_month', $lang); ?></a>
+                <div class="month-title"><?php echo $monthTitle; ?></div>
+                <a href='?date=<?php echo $next . $nav_query; ?>' class="nav-btn"><?php echo T('next_month', $lang); ?></a>
+            </div>
+            
+            <div class="today-wrapper">
+                <a href='?date=<?php echo $today_date . $nav_query; ?>' class="nav-btn"><?php echo T('back_to_today', $lang); ?></a>
             </div>
 
             <div class='calendar-grid'>
-                <div class="day-cell day-header">日</div>
-                <div class="day-cell day-header">一</div>
-                <div class="day-cell day-header">二</div>
-                <div class="day-cell day-header">三</div>
-                <div class="day-cell day-header">四</div>
-                <div class="day-cell day-header">五</div>
-                <div class="day-cell day-header">六</div>
+                <?php foreach (T('weekdays', $lang) as $dayName) : ?>
+                    <div class="day-cell day-header"><?php echo $dayName; ?></div>
+                <?php endforeach; ?>
 
                 <?php
                 for ($i = 0; $i < 42; $i++) {
                     $datetime = strtotime("+$i days", $tableFirstDay);
-                    $isToday = (date("Y-m-d", $datetime) == date("Y-m-d", $today));
+                    $dateYMD = date("Y-m-d", $datetime);
+                    
+                    $isToday = ($dateYMD == date("Y-m-d", $today));
                     $isWeekend = (date("w", $datetime) == 0 || date("w", $datetime) == 6);
-                    $isCurrentMonth = ($month == date("m", $datetime));
+                    $isCurrentMonth = ($monthInt == date("n", $datetime)); 
 
                     $class = "day-cell";
 
@@ -553,16 +630,19 @@ O\'er the brief noontide, fresh surprises find.',
                     }
                     if (!$isCurrentMonth) {
                         $class .= " other-month";
+                    } else {
+                        $class .= " clickable"; 
                     }
 
-                    echo "<div class='$class'>";
-                    echo date("d", $datetime);
+                    echo "<div class='$class'>"; 
+                    echo date("j", $datetime); 
                     echo "</div>";
                 }
                 ?>
             </div>
         </div>
     </div>
+    
 </body>
 
 </html>
