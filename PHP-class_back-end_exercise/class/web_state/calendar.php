@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        /* 設定 CSS 變數 */
+        /* :root 代表所有元素 */
         :root {
             --primary-color: #2c3e50;
             --accent-color: #c0392b;
@@ -31,6 +33,8 @@
             font-family: 'Roboto', sans-serif;
             height: 100vh;
             overflow: hidden;
+            /* var() 代表 CSS 變數 */
+            /* var → variable 變數 */
             background-color: var(--bg-color);
             color: var(--text-color);
         }
@@ -47,13 +51,17 @@
             align-items: center;
             justify-content: center;
             box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            /* z-index 控制css元素堆疊順序（垂直層次）的屬性 */
+            /* z-index 越大，元素越靠前 */
             z-index: 10;
         }
 
         .sonnet::before {
             content: '';
             position: absolute;
+            /* inset 代表四個方向的值（上、右、下、左） */
             inset: 0;
+            /* 背景漸層 */
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
             backdrop-filter: blur(2px);
             z-index: 1;
@@ -70,6 +78,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             max-height: 90vh;
+            /* 滾動條 */
             overflow-y: auto;
         }
 
@@ -106,7 +115,7 @@
         .calendar {
             width: 60%;
             height: 100%;
-            padding: 10px 30px;                       
+            padding: 10px 30px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -118,14 +127,14 @@
             width: 100%;
             max-width: 800px;
         }
-        
+
         /* 移除 calendar-header 的 flex 佈局，因為只剩年份導航在裡面 */
         .calendar-header {
             width: 100%;
             margin-bottom: 5px;
             padding: 0;
         }
-        
+
         .year-nav {
             display: flex;
             justify-content: space-between;
@@ -137,6 +146,7 @@
 
         .year-nav h1 {
             font-family: 'Playfair Display', serif;
+            /* rem 計算字體大小的單位，1rem = 16px */
             font-size: 3rem;
             color: var(--primary-color);
             font-weight: 700;
@@ -161,9 +171,10 @@
         /* New Wrapper for Today Button */
         .today-wrapper {
             display: flex;
-            justify-content: center; /* 置中 */
+            justify-content: center;
             width: 100%;
-            margin: 15px 0 20px 0; /* 在月份導航和日期網格間提供間距 */
+            /* 在月份導航和日期網格間提供間距 */
+            margin: 15px 0 20px 0;
         }
 
         .nav-btn {
@@ -172,14 +183,23 @@
             padding: 8px 15px;
             border: 1px solid var(--light-gray);
             border-radius: 30px;
+            /* 過度效果 */
+            /* ease 緩入緩出 */
             transition: all 0.3s ease;
             font-size: 0.9rem;
+            /* 文字大小寫轉換 */
+            /* uppercase 全大寫，lowercase 全小寫，capitalize 每個單字首字大寫，none 不轉換 */
             text-transform: uppercase;
+            /* 字母間距 */
             letter-spacing: 1px;
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            /* 滑鼠游標樣式 */
+            /* pointer 手指（點擊） */
             cursor: pointer;
+            /* 空白處理 */
+            /* nowrap 不換行 */
             white-space: nowrap;
         }
 
@@ -188,10 +208,11 @@
             color: white;
             border-color: var(--primary-color);
         }
-        
+
         /* Grid and Day Cells styles */
         .calendar-grid {
             display: grid;
+            /* fr → fraction 分數單位 */
             grid-template-columns: repeat(7, 1fr);
             gap: 10px;
             padding: 30px;
@@ -202,7 +223,9 @@
         }
 
         .day-cell {
-            aspect-ratio: 1.75; /* Keeping user's aspect ratio of 1.75 */
+            /* aspect-ratio 面積比 */
+            aspect-ratio: 1.75;
+            /* Keeping user's aspect ratio of 1.75 */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -230,6 +253,7 @@
 
         .day-cell:not(.day-header):not(.other-month):hover {
             background-color: var(--hover-bg);
+            /* 縮放大小 */
             transform: scale(1.1);
         }
 
@@ -268,26 +292,28 @@
                 position: sticky;
                 top: 0;
             }
-            
+
             /* Mobile header cleanup - calendar-header now only contains year-nav */
             .calendar-header {
                 /* Resetting mobile flex properties */
-                flex-direction: row; 
+                flex-direction: row;
                 justify-content: flex-start;
                 gap: 0;
             }
-            
+
             .month-nav {
                 flex-wrap: wrap;
                 justify-content: space-between;
                 gap: 10px;
             }
+
             .month-title {
                 flex-basis: 100%;
                 text-align: center;
                 order: 1;
             }
-            .month-nav > a {
+
+            .month-nav>a {
                 flex: 1 1 45%;
                 margin: 0;
                 order: 2;
@@ -552,16 +578,16 @@ O\'er the brief noontide, fresh surprises find.',
     $today = strtotime("now");
     $targetDay = (isset($_GET['date'])) ? $_GET['date'] : date("Y-m-d");
     $Ttime = strtotime($targetDay);
-    
-    $monthInt = date("n", $Ttime); 
+
+    $monthInt = date("n", $Ttime);
     $year = date("Y", $Ttime);
 
     $firstDayMonth = date("Y-m-1", $Ttime);
-    $firstWeek = date("w", strtotime($firstDayMonth)); 
+    $firstWeek = date("w", strtotime($firstDayMonth));
     $tableFirstDay = strtotime("-$firstWeek days", strtotime($firstDayMonth));
 
     // Nav dates: 
-    $nav_query = ""; 
+    $nav_query = "";
     $prev = date("Y-m-d", strtotime("-1 month", $Ttime));
     $next = date("Y-m-d", strtotime("+1 month", $Ttime));
     $prevYear = date("Y-m-d", strtotime("-1 year", $Ttime));
@@ -586,9 +612,9 @@ O\'er the brief noontide, fresh surprises find.',
 
     <div class="calendar">
         <div class="calendar-wrapper">
-            
+
             <div class="calendar-header">
-                </div>
+            </div>
 
             <div class="year-nav">
                 <a href='?date=<?php echo $prevYear . $nav_query; ?>' class="nav-btn"><?php echo T('prev_year', $lang); ?></a>
@@ -601,7 +627,7 @@ O\'er the brief noontide, fresh surprises find.',
                 <div class="month-title"><?php echo $monthTitle; ?></div>
                 <a href='?date=<?php echo $next . $nav_query; ?>' class="nav-btn"><?php echo T('next_month', $lang); ?></a>
             </div>
-            
+
             <div class="today-wrapper">
                 <a href='?date=<?php echo $today_date . $nav_query; ?>' class="nav-btn"><?php echo T('back_to_today', $lang); ?></a>
             </div>
@@ -615,10 +641,10 @@ O\'er the brief noontide, fresh surprises find.',
                 for ($i = 0; $i < 42; $i++) {
                     $datetime = strtotime("+$i days", $tableFirstDay);
                     $dateYMD = date("Y-m-d", $datetime);
-                    
+
                     $isToday = ($dateYMD == date("Y-m-d", $today));
                     $isWeekend = (date("w", $datetime) == 0 || date("w", $datetime) == 6);
-                    $isCurrentMonth = ($monthInt == date("n", $datetime)); 
+                    $isCurrentMonth = ($monthInt == date("n", $datetime));
 
                     $class = "day-cell";
 
@@ -631,18 +657,18 @@ O\'er the brief noontide, fresh surprises find.',
                     if (!$isCurrentMonth) {
                         $class .= " other-month";
                     } else {
-                        $class .= " clickable"; 
+                        $class .= " clickable";
                     }
 
-                    echo "<div class='$class'>"; 
-                    echo date("j", $datetime); 
+                    echo "<div class='$class'>";
+                    echo date("j", $datetime);
                     echo "</div>";
                 }
                 ?>
             </div>
         </div>
     </div>
-    
+
 </body>
 
 </html>
