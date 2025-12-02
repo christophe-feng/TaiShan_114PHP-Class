@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .num {
+            width: 50%;
+            height: 100px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .num>div {
+            height: 50px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .operator {
+            width: 50%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .operator button {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .operator button.active {
+            background-color: lightblue;
+        }
+
+        .submit {
+            width: 50%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .result {
+            width: 50%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="num">
+        <div class="num1">
+            <label for="num1">num1</label>
+            <input type="number" name="num1" id="num1">
+        </div>
+        <div class="num2">
+            <label for="num2">num2</label>
+            <input type="number" name="num2" id="num2">
+        </div>
+    </div>
+    <div class="operator">
+        <button data-op="+">+</button>
+        <button data-op="-">-</button>
+        <button data-op="*">*</button>
+        <button data-op="/">/</button>
+    </div>
+    <div class="submit">
+        <input type="submit" value="送出" id="myBtn" class="submit-btn">
+    </div>
+    <div class="result">
+        <span id="resultSpan">計算結果?</span>
+    </div>
+    <script>
+        // bind
+        const num1 = document.getElementById('num1');
+        const num2 = document.getElementById('num2');
+        const myBtn = document.getElementById('myBtn');
+        const resultSpan = document.getElementById('resultSpan');
+        const operatorBtns = document.querySelectorAll('.operator button');
+
+        console.log('num1', num1);
+        console.log('num2', num2);
+        console.log('myBtn', myBtn);
+        console.log('resultSpan', resultSpan);
+        console.log('operatorBtns', operatorBtns);
+
+        // 儲存選擇的運算符
+        let selectedOperator = '+';
+
+        // 運算符按鈕點擊事件
+        operatorBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                // 移除所有按鈕的 active 樣式
+                operatorBtns.forEach(b => b.classList.remove('active'));
+                // 加上當前按鈕的 active 樣式
+                this.classList.add('active');
+                // 儲存選擇的運算符
+                selectedOperator = this.getAttribute('data-op');
+                console.log('選擇的運算符:', selectedOperator);
+            });
+        });
+
+        // 預設選中第一個按鈕
+        operatorBtns[0].classList.add('active');
+
+        // 計算按鈕點擊事件
+        myBtn.addEventListener('click', function () {
+            console.log('click btn');
+            
+            // 將輸入轉換為數字
+            let num1Value = parseFloat(num1.value);
+            let num2Value = parseFloat(num2.value);
+
+            // 檢查輸入是否有效
+            if (isNaN(num1Value) || isNaN(num2Value)) {
+                resultSpan.innerText = '請輸入有效的數字!';
+                return;
+            }
+
+            console.log('num1Value', num1Value);
+            console.log('num2Value', num2Value);
+            console.log('operator', selectedOperator);
+
+            // 根據運算符進行計算
+            let result;
+            switch (selectedOperator) {
+                case '+':
+                    result = num1Value + num2Value;
+                    break;
+                case '-':
+                    result = num1Value - num2Value;
+                    break;
+                case '*':
+                    result = num1Value * num2Value;
+                    break;
+                case '/':
+                    if (num2Value === 0) {
+                        resultSpan.innerText = '錯誤:不能除以零!';
+                        return;
+                    }
+                    result = num1Value / num2Value;
+                    break;
+            }
+
+            // 顯示結果
+            let tmpText = `${num1Value} ${selectedOperator} ${num2Value} = ${result}`;
+            resultSpan.innerText = tmpText;
+        });
+    </script>
+</body>
+
+</html>
