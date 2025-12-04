@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 外層用 array 之後可以用foreach
+        // indexArr = PHP中的 indexed array
+        let indexArr = [1, 2, 3, 4, 5];
+        console.log('indexArr', indexArr);
+
+        // assocObj = PHP中的 associative array
+        let assocObj = {
+            "name": "John",
+            "age": 30,
+            "city": "New York"
+        };
+        console.log('assocObj', assocObj);
+
+        let myObj = [
+            {
+                'id': 1,
+                'name': 'amy'
+            },
+            {
+                'id': 2,
+                'name': 'bob'
+            },
+            {
+                'id': 3,
+                'name': 'cat'
+            }
+        ];
+        console.log('myObj', myObj);
+        console.log('myObj[0]', myObj[0]);
+        console.log('myObj[0].name', myObj[0].name);
+        console.log('myObj[0]["id"]', myObj[0]["id"]);
+        console.log('myObj[2]', myObj[2]);
+
+        let a = 10;
+        let b = 20;
+        let c = a + b;
+        // 要使用重音符號（esc下面），js的變數才能讀取
+        let tmpText = `${a} + ${b} = ${c}`;
+        let errorText = '${a} + ${b} = ${c}';
+        let errorText2 = "${a} + ${b} = ${c}";
+    </script>
+</body>
+
+</html>

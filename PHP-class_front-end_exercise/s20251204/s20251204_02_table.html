@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <table id="myTable">
+        <tr>
+            <td width="20%">
+                id
+            </td>
+            <td width="20%">
+                name
+            </td>
+            <td>
+                mobile
+            </td>
+        </tr>
+        <!-- <tr>
+            <td>1</td>
+            <td>amy</td>
+            <td>0911</td>
+        </tr> -->
+
+    </table>
+
+    <script>
+        // data
+        const data = [
+            {
+                'id': 1,
+                'name': 'amy',
+                'mobile': '0911'
+            },
+            {
+                'id': 2,
+                'name': 'bob',
+                'mobile': '0922'
+            },
+            {
+                'id': 3,
+                'name': 'cat',
+                'mobile': '0933'
+            },
+            {
+                'id': 4,
+                'name': 'dog',
+                'mobile': '0955'
+            },
+        ];
+
+        console.log('data', data);
+        // console.log('data[0]', data[0]);
+        // console.log('data[1]', data[1]);
+        // console.log('data[2]', data[2]);
+
+        // forEach
+        let tmpText = ``;
+        data.forEach(function (value, key) {
+            tmpText += `
+                <tr>
+                    <td>${value.id}</td>
+                    <td>${value.name}</td>
+                    <td>${value.mobile}</td>
+                </tr>
+            `;
+            // console.log('key', key);
+            // console.log('value', value);
+            // console.log('value.id', value.id);
+            // console.log('value.name', value.name);
+            // console.log('value.mobile', value.mobile);
+        });
+        console.log('tmpText', tmpText);
+
+
+        // 1.bind
+        // const myTable = document.querySelector('#myTable');
+        const myTable = document.getElementById('myTable');
+        console.log('myTable', myTable);
+       
+        // 2.action
+        // myTable.innerHTML = tmpText;
+        myTable.innerHTML += tmpText;
+
+    </script>
+</body>
+
+</html>

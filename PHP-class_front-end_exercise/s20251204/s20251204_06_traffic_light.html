@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .display {
+            width: 80%;
+            height: 30vh;
+            background-color: mediumslateblue;
+            margin: auto;
+        }
+
+        .traffic-light {
+            width: 80%;
+            height: 30vh;
+            background-color: #ccc;
+            margin: auto;
+            margin-top: 30px;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .traffic-light>.button {
+            width: 100px;
+            height: 100px;
+            /* background-color: dodgerblue; */
+            border-radius: 100px;
+        }
+
+        .green-button,
+        .bg-green {
+            background-color: lightgreen;
+        }
+
+        .red-button,
+        .bg-red {
+            background-color: lightcoral;
+        }
+
+        .yellow-button,
+        .bg-yellow {
+            background-color: lightyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="display">
+
+    </div>
+    <div class="traffic-light">
+        <div class="button red-button"></div>
+        <div class="button yellow-button"></div>
+        <div class="button green-button"></div>
+    </div>
+
+    <script>
+        // function
+        function lightFun(getClass) {
+            console.log('hello :))');
+            console.log('hello 123:))');
+            console.log('hello 123456:))');
+            let result = getClass;
+            console.log('result', result);
+        }
+
+        // 1. bind
+        const display = document.querySelector('.display');
+        const greenbutton = document.querySelector('.green-button');
+        const redbutton = document.querySelector('.red-button');
+        const yellowbutton = document.querySelector('.yellow-button');
+
+        // 2.action
+        greenbutton.addEventListener('click', function () {
+            display.setAttribute('class', 'display bg-green');
+            let getClass = display.getAttribute('class');
+            lightFun(getClass);
+        });
+
+        redbutton.addEventListener('click', function () {
+            display.setAttribute('class', 'display bg-red');
+            let getClass = display.getAttribute('class');
+            lightFun(getClass);
+        });
+
+        yellowbutton.addEventListener('click', function () {
+            display.setAttribute('class', 'display bg-yellow');
+            let getClass = display.getAttribute('class');
+            lightFun(getClass);
+        });
+    </script>
+</body>
+
+</html>
