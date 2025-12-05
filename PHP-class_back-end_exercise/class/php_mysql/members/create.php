@@ -21,8 +21,8 @@ $sql="INSERT INTO users ";
 $sql.="(`".join("`,`",$cols)."`)";
 $sql.=" VALUES ( '".join("','",$_POST)."' )";
 
-$sql="INSERT INTO users (account, password, name, tel, national_id, address, email, post_code) VALUES (
-                        '$account', '$password', '$name', '$tel', '$national_id', '$address', '$email', '$post_code')";
+// $sql="INSERT INTO users (account, password, name, tel, national_id, address, email, post_code) VALUES (
+//                         '$account', '$password', '$name', '$tel', '$national_id', '$address', '$email', '$post_code')";
 
 echo $sql;
 
@@ -30,5 +30,9 @@ $pdo->exec($sql);
 echo "註冊成功";
 
 // join("','",$_POST)
+
+// 重新導向到 reg.php
+header("Location: reg.php");
+
 
 ?>

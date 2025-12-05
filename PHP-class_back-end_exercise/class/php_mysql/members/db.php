@@ -7,9 +7,9 @@ $sql="SELECT * FROM category";
 $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 // 用陣列形式呈現
-echo "<pre>";
-print_r($rows);
-echo "</pre>";
+// echo "<pre>";
+// print_r($rows);
+// echo "</pre>";
 
 ?>
 <style>
@@ -86,9 +86,9 @@ foreach($rows as $row){
 <?php
 $sql="SELECT * FROM category where id=2";
 $row=$pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
-echo "<pre>";
-print_r($row);
-echo "</pre>";
+// echo "<pre>";
+// print_r($row);
+// echo "</pre>";
 
 echo $row['name'];
 
