@@ -51,7 +51,6 @@ if (count($expenses) > 0) {
             <th>付款方式</th>
             <th>類型</th>
             <th>付款帳戶</th>
-            <th>備註</th>
             <th>日期</th>
             <th>時間</th>
             <th>操作</th>
@@ -69,12 +68,11 @@ if (count($expenses) > 0) {
                 <td><span class='payment-badge'>{$exp['payment_method_name']}</span></td>
                 <td><span class='{$type_class}'>{$exp['type']}</span></td>
                 <td><span class='account-badge'>{$exp['account']}</span></td>
-                <td>{$exp['desc']}</td>
                 <td>{$exp['date']}</td>
                 <td>{$exp['time']}</td>
                 <td>
-                    <button>編輯</button>
-                    <button>刪除</button>
+                    <a class='btn-edit' href='edit.php?id={$exp['id']}'>編輯</a>
+                    <a class='btn-delete' href='javascript:del({$exp['id']})'>刪除</a>
                 </td>
             </tr>";
     }
@@ -98,4 +96,15 @@ if (count($expenses) > 0) {
         </div>
     </div>
 </body>
+<script>
+    function del(id){
+        
+        if(confirm(`確定要刪除編號為 ${id} 的消費紀錄嗎？`)){
+            location.href=`delete.php?id=${id}`;
+        }
+    }
+</script>
+
+
 </html>
+
