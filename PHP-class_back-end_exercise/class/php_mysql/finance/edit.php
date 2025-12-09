@@ -1,9 +1,11 @@
 <?php
-$dsn = "mysql:host=localhost;dbname=finance_db;charset=utf8";
-$pdo = new PDO($dsn, 'root', '');
+// $dsn="mysql:host=localhost;dbname=finance_db;charset=utf8";
+// $pdo=new PDO($dsn,'root','');
+include_once "sql.php";
 
-$sql = "SELECT * FROM `daily_account` WHERE `id`='{$_GET['id']}'";
-$exp = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+// $sql = "SELECT * FROM `daily_account` WHERE `id`='{$_GET['id']}'";
+// $exp = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+$exp = find('daily_account');
 
 ?>
 
@@ -77,7 +79,9 @@ $exp = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
                         <label for="store">商店 (必填) *</label>
                         <select name="store" id="store" required>
                             <option value="">-- 請選擇或輸入商店 --</option>
-                            <?php $stores = $pdo->query("SELECT `id`,`store` FROM `daily_account` GROUP BY `store`")->fetchALL(PDO::FETCH_ASSOC);
+                            <?php 
+                            // $stores = $pdo->query("SELECT `id`,`store` FROM `daily_account` GROUP BY `store`")->fetchALL(PDO::FETCH_ASSOC);
+                            $stores=all('daily_account',[]," GROUP BY `store`");
                             foreach ($stores as $store) {
                                 $sel = ($exp['store'] == $store['store']) ? 'selected' : '';
 
@@ -125,8 +129,8 @@ $exp = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
                             <select name="account" id="account" required>
                                 <option value="">-- 請選擇帳戶 --</option>
                                 <?php
-                                $accounts = $pdo->query("SELECT `account` FROM `daily_account` GROUP BY  `account`")->fetchALL(PDO::FETCH_ASSOC);
-
+                                // $accounts = $pdo->query("SELECT `account` FROM `daily_account` GROUP BY  `account`")->fetchALL(PDO::FETCH_ASSOC);
+                                $accounts=all('daily_account',[]," GROUP BY `account`");
                                 foreach ($accounts as $acc) {
                                     $sel = ($exp['account'] == $acc['account']) ? 'selected' : '';
                                     echo "<option value='{$acc['account']}' $sel>{$acc['account']}</option>";
