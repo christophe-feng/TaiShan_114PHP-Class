@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .display {
+            width: 300px;
+            height: 300px;
+            background-color: lightgrey;
+            /* 背景圖片能夠100%放在.display的區塊中 */
+            background-size: contain;
+            /* 背景圖片能夠重複播放 */
+            background-repeat: repeat;
+            margin: auto;
+        }
+
+        .controllor {
+            width: 300px;
+            height: 100px;
+            background-color: darkgray;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .button {
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+        }
+
+        .btn-r-light {
+            background-color: lightcoral;
+        }
+
+        .btn-g-light {
+            background-color: lightgreen;
+        }
+
+        .btn-y-light {
+            background-color: lightyellow;
+        }
+
+        .bg-red {
+            background-image: url(./images/hong.gif);
+        }
+
+        .bg-green {
+            background-image: url(./images/lv.gif);
+        }
+
+        .bg-yellow {
+            background-image: url(./images/huang.gif);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="display">
+
+    </div>
+
+    <div class="controllor">
+        <div class="button btn-r-light">
+
+        </div>
+        <div class="button btn-y-light">
+
+        </div>
+        <div class="button btn-g-light">
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    <script>
+    // jquery start
+    $(document).ready(function () {        
+        // bind
+
+        // const display = document.querySelector('.display');
+        const display = $('.display');
+        const btnRed = $('.btn-r-light');
+        const btnYellow = $('.btn-y-light');
+        const btnGreen = $('.btn-g-light');
+
+        console.log('display', display);
+
+        // action
+
+        // btnRed.addEventListener('click', function () {
+        //     display.style.backgroundColor = 'lightcoral';
+        //     console.log('display click ok');
+        // });
+
+        btnRed.click(function () {
+            console.log('jquery btnRed click ok');
+            display.attr('class', 'display bg-red');
+        });
+
+        btnYellow.click(function () {
+            console.log('jquery btnYellow click ok');
+            display.attr('class', 'display bg-yellow');
+        });
+
+        btnGreen.click(function () {
+            console.log('jquery btnGreen click ok');
+            display.attr('class', 'display bg-green');
+        });
+
+    });
+    // jquery end
+    </script>
+</body>
+
+</html>

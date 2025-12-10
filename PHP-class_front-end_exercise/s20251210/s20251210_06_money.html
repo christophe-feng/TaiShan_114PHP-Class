@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 80%;
+            /* height: 60vh; */
+            /* background-color: lightblue; */
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .form-box {
+            width: 50%;
+            background-color: lightblue;
+            margin: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        .label-text {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h3>1.財務安全 只要出門就會到</h3>
+            <table>
+                <tr>
+                    <td class="label-text">
+                        <label for="house">1.住 買 / 租 / 月</label>
+                    </td>
+                    <td>
+                        <input type="text" name="house" id="house" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-text">
+                        <label for="food">2.生活 食物/生活用品</label>
+                    </td>
+                    <td>
+                        <input type="text" name="food" id="food" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-text">
+                        <label for="utilities">1.3 公共事業費 水 電費 網路 電話費</label>
+                    </td>
+                    <td>
+                        <input type="text" name="utilities" id="utilities" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-text">
+                        <label for="transportation">1.4 交通費 </label>
+                    </td>
+                    <td>
+                        <input type="text" name="transportation" id="transportation" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-text">
+                        <label for="insurance">1.5 基本保險</label>
+                    </td>
+                    <td>
+                        <input type="text" name="insurance" id="insurance" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <button id="calcBtn">計算總額</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="result-box">
+            <h3>1.財務安全</h3>
+            <p>每月支出總計：<span id="monthly-total"></span></p>
+            <p>每年支出總計：<span id="annual-total"></span></p>
+            <p>10年支出總計：<span id="decade-total"></span></p>
+            <!-- <h3>2.財務活力 娛樂費 治裝費 </h3>
+            <h3>3.財務獨立 奢侈品 捐贈</h3>
+            <h3>4.財務自由</h3>
+            <h3>5.絕對財務自由 幫助弱勢</h3> -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    <script>
+        // document.addEventListener('DOMContentLoaded', function (){
+        $(document).ready(function () {
+         
+            // bind
+            // 輸入欄位
+
+            // const houseInput = document.getElementById('house');
+            // const foodInput = document.getElementById('food');
+            // const utilitiesInput = document.getElementById('utilities');
+            // const transportationInput = document.getElementById('transportation');
+            // const insuranceInput = document.getElementById('insurance');
+            const houseInput = $('#house');
+            const foodInput = $('#food');
+            const utilitiesInput = $('#utilities');
+            const transportationInput = $('#transportation');
+            const insuranceInput = $('#insurance');
+
+            // 計算
+
+            // const calcBtn = document.getElementById(.calcBtn);
+            const calcBtn = $('#calcBtn');
+
+            // 結果
+
+            // const monthlyTotalSpan = document.getElementById('monthly-total');
+            // const annualTotalSpan = document.getElementById('annual-total');
+            // const decadeTotalSpan = document.getElementById('decade-total');
+            const monthlyTotalSpan = $('#monthly-total');
+            const annualTotalSpan = $('#annual-total');
+            const decadeTotalSpan = $('#decade-total');
+
+            // action
+            // 給予初始值 init
+
+            // houseInput.value = '5000';
+            // foodInput.value = '8000';
+            // utilitiesInput.value = '1000';
+            // transportationInput.value= '2500';
+            // insuranceInput.value= '1000';
+            houseInput.val('5000');
+            foodInput.val('8000');
+            utilitiesInput.val('1000');
+            transportationInput.val('2500');
+            insuranceInput.val('1000');
+
+            // calcBtn.addEventListener('click', function () {
+            calcBtn.click(function () {
+                console.log('calcBtn ok');
+            
+                // 取得輸入值
+            
+                // let houseValue = Number(houseInput.value);
+                // let foodValue = Number(foodInput.value);
+                // let utilitiesValue = Number(utilitiesInput.value);
+                // let transportationValue = Number(transportationInput.value);
+                // let insuranceValue = Number(insuranceInput.value);
+                let houseValue = Number(houseInput.val());
+                let foodValue = Number(foodInput.val());
+                let utilitiesValue = Number(utilitiesInput.val());
+                let transportationValue = Number(transportationInput.val());
+                let insuranceValue = Number(insuranceInput.val());
+
+                console.log('houseValue', houseValue);
+                console.log('foodValue', foodValue);
+                console.log('utilitiesValue', utilitiesValue);
+                console.log('transportationValue', transportationValue);
+                console.log('insuranceValue', insuranceValue);
+
+                // 計算總額
+                let monthlyTotal = houseValue + foodValue + utilitiesValue + transportationValue + insuranceValue;
+                let annualTotal = monthlyTotal * 12;
+                let decadeTotal = annualTotal * 10;
+                console.log('monthlyTotal', monthlyTotal);
+
+                // monthlyTotalSpan.textContent = monthlyTotal;
+                // annualTotalSpan.textContent = annualTotal;
+                // decadeTotalSpan.textContent = decadeTotal;
+                monthlyTotalSpan.text(monthlyTotal);
+                annualTotalSpan.text(annualTotal);
+                decadeTotalSpan.text(decadeTotal);
+            });
+        })
+    </script>
+
+</body>
+
+</html>
