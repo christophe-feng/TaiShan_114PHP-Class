@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 30%;
+            /* height: 50vh; */
+            background-color: burlywood;
+            margin: auto;
+            margin-top: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+
+            padding: 15px;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .container>div {
+            width: 80%;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .text-red {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>貸款試算</h3>
+    <div class="container container-S3-input">
+        <div>
+            <label for="moneyS3">貸款金額 元</label>
+            <input type="number" name="" id="moneyS3" value="0">
+        </div>
+        <div>
+            <label for="yearS3">還款時間 年</label>
+            <input type="number" name="" id="yearS3" value="0">
+        </div>
+        <div>
+            <label for="rateS3">貸款利率 %</label>
+            <input type="number" name="" id="rateS3" value="0">
+        </div>
+        <div>
+            <input type="submit" value="貸款試算" id="btnS3">
+        </div>
+
+    </div>
+    <div class="container container-S3-output">
+        <div id="resultS3">
+            <!-- 1. 100元<br> -->
+            <!-- 2. 110元<br> -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    <script>
+        $(document).ready(function () {
+            // bind
+            // input
+            const moneyS3 = $('#moneyS3');
+            const yearS3 = $('#yearS3');
+            const rateS3 = $('#rateS3');
+            // output
+            const resultS3 = $('#resultS3');
+            // button
+            const btnS3 = $('#btnS3');
+
+            console.log('moneyS3', moneyS3);
+            console.log('yearS3', yearS3);
+            console.log('rateS3', rateS3);
+            console.log('resultS3', resultS3);
+            console.log('btnS3', btnS3);
+
+            // action
+            // initial value
+            moneyS3.val(1000000);
+            yearS3.val(7);
+            rateS3.val(10);
+
+            btnS3.click(function () {
+                console.log('btnS3 clicked');
+
+                // get input value
+                let getMoneyS3 = Number(moneyS3.val());
+                let getYearS3 = Number(yearS3.val());
+                let getRateS3 = Number(rateS3.val()) / 100;
+                console.log('getMoneyS3', getMoneyS3);
+                console.log('getYearS3', getYearS3);
+                console.log('getRateS3', getRateS3);
+                
+                let tmpText = ``;
+
+                // 計算每月本利攤還金額
+                let resultMonthS3 = (getMoneyS3 * getRateS3 / 12 * Math.pow(1 + getRateS3 / 12, getYearS3 * 12)) /
+                    (Math.pow(1 + getRateS3 / 12, getYearS3 * 12) - 1);
+
+                // 只還利息不還本金 每月金額
+                let resultOnlyInterestS3 = getMoneyS3 * getRateS3 / 12;
+
+                tmpText = `每月本利攤還金額 ${resultMonthS3.toFixed(0)} 元<br><br>`;
+                tmpText = `理財型房貸 ${resultOnlyInterestS3.toFixed(0)} 元<br><br>`;
+                resultS3.html(tmpText);
+
+                let lastLine = `
+                <span class='text-red'>總投入金額 ${getYearS3}年：${(yearMoneyS3 * getYearS3).toFixed(0)} 元<br><br></span>
+                <span class='text-red'>總獲利：${sumS3.toFixed(0)} 元<br><br></span>
+                `;
+                resultS3.prepend(lastLine);
+                
+                // append v.s. prepend
+                // let firstLine = '這是第一行文字<br>';
+                // let lastLine = '這是最後一行文字<br>';
+                // resultS3.prepend(fistLine);
+                // resultS3.append(lastLine);
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
