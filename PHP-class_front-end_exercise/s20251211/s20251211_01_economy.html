@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 30%;
+            /* height: 50vh; */
+            background-color: burlywood;
+            margin: auto;
+            margin-top: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+
+            padding: 15px;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .container>div {
+            width: 80%;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .text-red {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>單筆投資未來值計算</h3>
+    <div class="container container-S1-input">
+        <div>
+            <label for="moneyS1">單筆金額</label>
+            <input type="number" name="" id="moneyS1" value="0">
+        </div>
+        <div>
+            <label for="yearS1">投資時間</label>
+            <input type="number" name="" id="yearS1" value="0">
+        </div>
+        <div>
+            <label for="rateS1">投資利率</label>
+            <input type="number" name="" id="rateS1" value="0">
+        </div>
+        <div>
+            <input type="submit" value="單筆投資計算" id="btnS1">
+        </div>
+
+    </div>
+    <div class="container container-s1-output">
+        <div id="resultS1">
+            1. 100元<br>
+            2. 110元<br>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    <script>
+        $(document).ready(function () {
+            // bind
+            // input
+            const moneyS1 = $('#moneyS1');
+            const yearS1 = $('#yearS1');
+            const rateS1 = $('#rateS1');
+            // output
+            const resultS1 = $('#resultS1');
+            // button
+            const btnS1 = $('#btnS1');
+
+            console.log('moneyS1', moneyS1);
+            console.log('yearS1', yearS1);
+            console.log('rateS1', rateS1);
+            console.log('resultS1', resultS1);
+            console.log('btnS1', btnS1);
+
+            // action
+            // initial value
+            moneyS1.val(1000000);
+            yearS1.val(7);
+            rateS1.val(10);
+
+            btnS1.click(function () {
+                console.log('btnS1 clicked');
+
+                // get input value
+                let getMoneyS1 = Number(moneyS1.val());
+                let getYearS1 = Number(yearS1.val());
+                let getRateS1 = Number(rateS1.val()) / 100;
+                console.log('getMoneyS1', getMoneyS1);
+                console.log('getYearS1', getYearS1);
+
+                let sumS1 = 0;
+
+                // 計算
+
+                // 1. 100
+                // 2. 100 * (1 + 0.1) = 110
+                // 3. 110 * (1 + 0.1) = 121
+                // 第1年 1000000
+                // 第2年 1000000 * (1 + 0.1)
+                // 第3年 1000000 * (1 + 0.1) *
+
+                // 用for迴圈決定執行到第i年（前端只會顯示到第i年的數值）
+                let tmpText = ``;
+                for (let i = 1; i <= getYearS1; i++) {
+                    console.log('i', i);
+                    tmpText += `第${i}年：`;
+
+                    //第一年
+
+                    // toFiexd(0) 四捨五入取整數到第0位
+                    if (i == 1) {
+                        sumS1 = getMoneyS1;
+                        tmpText += `${sumS1.toFixed(0)} 元 <br>`;
+                    } else {
+                        // 其他年份
+                        sumS1 = sumS1 * (1 + getRateS1);
+                        tmpText += `${sumS1.toFixed(0)} 元 <br>`;
+                    }
+                }
+                console.log('tmpText', tmpText);
+
+                resultS1.html(tmpText);
+
+                let lastLine = `<span class='text-red'>總計 ${getYearS1}年：${sumS1.toFixed(0)} 元<br><br></span>`;
+                resultS1.prepend(lastLine);
+
+                // append v.s. prepend
+                // let firstLine = '這是第一行文字<br>';
+                // let lastLine = '這是最後一行文字<br>';
+                // resultS1.prepend(fistLine);
+                // resultS1.append(lastLine);
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
