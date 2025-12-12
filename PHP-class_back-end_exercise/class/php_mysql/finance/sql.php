@@ -2,17 +2,17 @@
 $dsn="mysql:host=localhost;charset=utf8;dbname=finance_db";
 $pdo=new PDO($dsn,'root','');
 
-all();
-find();
-insert('category',['name'=>'出差']);
-update('category',['id'=>'7','name'=>'公益慈善']);
-delete('category',$row);
+// all();
+// find();
+// insert('category',['name'=>'出差']);
+// update('category',['id'=>'7','name'=>'公益慈善']);
+// delete('category',$row);
 
 //all();
 
-echo "<pre>";
-print_r(all('daily_account',['id'=>13])[0]['item']);
-echo "</pre>";
+// echo "<pre>";
+// print_r(all('daily_account',['id'=>13])[0]['item']);
+// echo "</pre>";
 
 function all($table='daily_account',$where=[],$desc=' ORDER BY `id` ASC'){
     
