@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: lightblue;
+            margin: auto;
+        }
+
+        .button {
+            width: 300px;
+            height: 100px;
+            background-color: lightpink;
+            margin: auto;
+            margin-top: 5px;
+        }
+
+        .bg-yellow {
+            background-color: yellow;
+        }
+
+        .bg-blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+    <div class="button">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    <script>
+        $(document).ready(function () {
+            // bind
+            const box = $('.box');
+            const button = $('.button');
+
+            // flag
+            let isBlue = true;
+            let isHidden = false;
+
+            // action
+            button.click(function () {
+                console.log('jquery btn click of');
+                // 1. 藍色 顯示
+                // click → toggle → 淡入淡出 變成黃色
+
+                if(isHidden) {
+                    box.fadeIn(1000);
+                    isHidden = false;
+                    return;
+                }else{
+                    // 再收起來 才會變色
+                    // 第二個參數為回呼函數，前面的動作完成後（淡出動畫完成）才會執行回呼函數的內容
+                    box.fadeOut(1000, function() {
+                        // callback
+                        if (isBlue) {
+                            box.attr('class', 'box bg-yellow');
+                            isBlue = false;
+                        }else{
+                            box.attr('class','box bg-blue');
+                            isBlue = true;
+                        }
+                        isHidden = true;
+                    });
+                }
+
+
+            });
+        });
+
+    </script>
+</body>
+
+</html>

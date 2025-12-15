@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="box box-1">
+
+        </div>
+        <div class="box box-2">
+
+        </div>
+        <div class="box box-3">
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // bind
+            // const box = document.querySelector('.box');
+            // const box = document.querySelectorAll('.box');
+            const box = $('.box');
+            console.log('box', box);
+
+            // action
+
+            // jquery each
+            // box.each(function (key, value) {
+            //     console.log('key', key);
+            //     console.log('value', value);
+            // });
+
+            const data = [
+                {
+                    'id': 1,
+                    'name': 'amy',
+                },
+                {
+                    'id':2,
+                    'name': 'bob',
+                },
+                {
+                    'id':3,
+                    'name': 'cat'
+                }
+            ];
+
+            // jquery each
+            $.each(box, function (key, value) {
+                console.log('key',key);
+                console.log('value', value);
+            });
+
+            // 原生
+            // data.forEach(value => {
+            //     console.log('value', value);
+            // });
+        })
+    </script>
+</body>
+</html>
