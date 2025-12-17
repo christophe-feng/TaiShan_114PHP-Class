@@ -119,9 +119,11 @@ Class DB {
     function delete($id){
         $sql="DELETE FROM `$this->table` ";
         if(is_array($id)){
+            // 多條件
             $tmp=$this->arrayToSql($id);
             $sql .= " where " . implode(" && ",$tmp);
         }else{
+            // 單條件
             $sql .= " where `id`='$id' ";
         }
         echo $sql;
