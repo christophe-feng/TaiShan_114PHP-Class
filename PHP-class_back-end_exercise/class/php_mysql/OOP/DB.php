@@ -136,7 +136,7 @@ Class DB {
         return $tmp;
     }
 
-}
+
 
 function q($sql){
     global $pdo;
