@@ -12,7 +12,7 @@
 
 <body>
     <h1 class="header">Fetch</h1>
-    <button onclick="getEvent()"></button>
+    <button onclick="getEvent()">載入活動</button>
     <div class="title"></div>
     <h4></h4>
     <ul></ul>
@@ -28,26 +28,19 @@
     * 4.建立錯誤處理
     ********************************************************/
 
+   //建立FETCH請求及實質內容
 function getEvent(){
 
-    //建立FETCH請求及實質內容
     //建立請求
-    //使用表單資料傳送
-    // let body = "name=mack&age=32";
-    //headers={'Content-Type':'application/x-www-form-urlencoded'}
-    //使用json傳送
-    // let body = JSON.stringify({ name: 'mack', age: 32 });
-    //headers={'Content-Type':'application/json'}
 
-    // fetch(url,{method,body,headers:{'Content-Type':'application/x-www-form-urlencoded'}})
-    fetch('https://kktix.com/events.json')
+    fetch('testApi.php')
         .then(function (response) {
 
             //回傳是json時
             return response.json()
 
             //回傳是text時
-            return response.text()
+            // return response.text()
 
         })
         .then(function (data) {
@@ -59,7 +52,7 @@ function getEvent(){
             let html = ''
             data.entry.forEach(function (event) {
 
-                console.log(event.author.name, event.title)
+                // console.log(event.author.name, event.title)
                 // html=html+'<li><div></div><div></div></li>'
                 html = html + `<li>
                         <div>${event.title}</div>
@@ -69,17 +62,17 @@ function getEvent(){
 
             document.querySelector("ul").innerHTML = html
         })
+        
+        // console.log(data)
 
-            console.log(data)
-
-        })
         .catch(function (err) {
             //error
         })
+        }
 
     //建立回呼函式(call back function)來處理回應時的各項行為
 
 
     //建立錯誤處理
-}
+
 </script>

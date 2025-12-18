@@ -14,4 +14,4 @@ foreach($events->entry as $event){
 // print_r($data);
 // echo "</pre>";
 
-echo 
+echo json_encode($data);

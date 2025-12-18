@@ -18,15 +18,16 @@ $events=json_decode($source);
 
 <body>
     <h1 class="header">Fetch</h1>
-    <!-- <button onclick="getEvent()"></button> -->
+    <!-- <button onclick="getEvent()">載入活動</button> -->
     <div class="title"></div>
     <h4></h4>
     <ul>
-        <?php foreach($events-> entry as $event):?>
+        <?php foreach($events->entry as $event): ?>
         <li>
-            <div><?$event -> title;?></div>
-            <div><?$event -> author -> name;?></div>
+            <div><?$event->title;?></div>
+            <div><?$event->author->name;?></div>
         </li>
+        <?php endforeach;?>
     </ul>
 
 </body>
