@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container-input {
+            width: 50%;
+            margin: auto;
+            /* border: 1px solid black; */
+            /* background-color: lightblue; */
+            text-align: center;
+        }
+
+        .container-output {
+            width: 50%;
+            margin: auto;
+            /* border: 1px solid black; */
+            /* background-color: lightgray; */
+            text-align: center;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-input">
+        <p>
+            <input type="number" name="num1" id="num1" value="100">
+        </p>
+        <p>
+            <select name="opt" id="opt">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+        </p>
+        <p>
+            <input type="number" name="num2" id="nums" value="50">
+        </p>
+        <p>
+            <button id="btnCalc">計算</button>
+        </p>
+    </div>
+
+    <div class="container-output">
+        <h2>結果：<span id="result">0</span></h2>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    <script>
+        $(document).ready(function () {
+            // bind
+            const num1 = $('#num1');
+            const num2 = $('#num2');
+            const opt = $('#opt');
+            const btnCalc = $('#btnCalc');
+            const result = $('#result');
+
+            // action
+
+            btnCalc.click(function () {
+                console.log('click ok');
+
+                // get value
+                let num1Value = Number(num1.val());
+                let num2Value = Number(num2.val());
+                let optValue = opt.val();
+                console.log('num1Value', num1Value);
+                console.log('num2Value', num2Value);
+                console.log('optValue', optValue);
+
+                let tmpResult = '';
+                switch (optValue) {
+                    case '+':
+                        tmpResult = `${num1Value} + ${num2Value} = ${num1Value + num2Value}`;
+                        break;
+                    case '-':
+                        tmpResult = `${num1Value} - ${num2Value} = ${num1Value - num2Value}`;
+                        break;
+                    case '*':
+                        tmpResult = `${num1Value} * ${num2Value} = ${num1Value * num2Value}`;
+                        break;
+                    case '/':
+                        tmpResult = `${num1Value} / ${num2Value} = ${num1Value / num2Value}`;
+                        break;
+                    default:
+                        break;
+                }
+                console.log('tmpResult', tmpResult);
+                result.text(tmpResult);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
