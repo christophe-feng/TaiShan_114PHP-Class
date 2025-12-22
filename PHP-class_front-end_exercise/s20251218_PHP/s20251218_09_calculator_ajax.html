@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,11 +22,14 @@
             text-align: center;
         }
 
-        input, select, button {
+        input,
+        select,
+        button {
             width: 100%;
         }
     </style>
 </head>
+
 <body>
     <div class="container-input">
         <p>
@@ -54,51 +58,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
+        </script>
 
     <script>
         $(document).ready(function () {
             // bind
-            const num1 = $('#num1');
-            const num2 = $('#num2');
-            const opt = $('#opt');
-            const btnCalc = $('#btnCalc');
+            const myForm = $('#myForm');
             const result = $('#result');
 
+            console.log('myForm', myForm);
+
             // action
-            btnCalc.click(function () {
-                console.log('click ok');
+            
+            $(myForm).sumbit(function (e) {
+                // form sumbit 阻擋預設行為
+                e.preventDefault();
 
-                // get value
-                let num1Value = Number(num1.val());
-                let num2Value = Number(num2.val());
-                let optValue = opt.val();
-                console.log('num1Value', num1Value);
-                console.log('num2Value', num2Value);
-                console.log('optValue', optValue);
+                let url = "./calculator.php"
+                let formData = myForm.serialize();
+                // let formData = myForm.serializeArray();
+                // console.log('formData', formData);
 
-                let tmpResult = '';
-                switch (optValue) {
-                    case '+':
-                        tmpResult = `${num1Value} + ${num2Value} = ${num1Value + num2Value}`;
-                        break;
-                    case '-':
-                        tmpResult = `${num1Value} - ${num2Value} = ${num1Value - num2Value}`;
-                        break;
-                    case '*':
-                        tmpResult = `${num1Value} * ${num2Value} = ${num1Value * num2Value}`;
-                        break;
-                    case '/':
-                        tmpResult = `${num1Value} / ${num2Value} = ${num1Value / num2Value}`;
-                        break;
-
-                    default:
-                        break;
-                }
-                console.log('tmpResult', tmpResult);
-                result.text(tmpResult);
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    success: function (res) {
+                        let data = res;
+                        console.log('data', data);
+                        result.text(data.result);
+                    }
+                });
             });
+               
         });
     </script>
 </body>
+
 </html>
