@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>線上計算機</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .container-input {
+            margin-bottom: 20px;
+        }
+
+        .container-output {
+            text-align: center;
+            padding: 30px;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .calculator-title {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        .container-input p {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            margin-left: 4px;
+        }
+
+        .container-output h2 {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            background: white;
+            color: #333;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 44px;
+        }
+
+        .operator-select {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-calculate {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-calculate:active {
+            transform: translateY(0);
+        }
+
+        #result {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            word-break: break-all;
+        }
+
+        .bg-red {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .bg-green {
+            background: linear-gradient(135deg, #55efc4 0%, #81ecec 100%);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .bg-yellow {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .calculator-title {
+                font-size: 24px;
+            }
+
+            input[type="number"],
+            select {
+                font-size: 16px;
+                padding: 14px 16px;
+            }
+
+            #result {
+                font-size: 24px;
+            }
+        }
+
+        /* 添加一些微動畫效果 */
+        .container-input p {
+            animation: slideUp 0.4s ease forwards;
+            opacity: 0;
+        }
+
+        .container-input p:nth-child(2) { animation-delay: 0.1s; }
+        .container-input p:nth-child(3) { animation-delay: 0.2s; }
+        .container-input p:nth-child(4) { animation-delay: 0.3s; }
+        .container-input p:nth-child(5) { animation-delay: 0.4s; }
+        .container-input p:nth-child(6) { animation-delay: 0.5s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container container-input">
+        <h1 class="calculator-title">🧮 線上計算機</h1>
+        
+        <form action="" method="get" id="myForm">
+            <p>
+                <label for="num1" class="input-label">第一個數字</label>
+                <input type="number" name="num1" id="num1" placeholder="請輸入數字" step="any">
+            </p>
+            <p>
+                <label for="opt" class="input-label">運算符號</label>
+                <select name="opt" id="opt" class="operator-select">
+                    <option value="+">➕ 加法 (+)</option>
+                    <option value="-">➖ 減法 (−)</option>
+                    <option value="*">✖️ 乘法 (×)</option>
+                    <option value="/">➗ 除法 (÷)</option>
+                </select>
+            </p>
+            <p>
+                <label for="num2" class="input-label">第二個數字</label>
+                <input type="number" name="num2" id="num2" placeholder="請輸入數字" step="any">
+            </p>
+            <p>
+                <label for="color" class="input-label">結果背景顏色</label>
+                <select name="color" id="color">
+                    <option value="red">🔴 粉紅色</option>
+                    <option value="green">🟢 綠色</option>
+                    <option value="yellow">🟡 黃色</option>
+                </select>
+            </p>
+            <p>
+                <button type="submit" id="btnCalc" class="btn-calculate">
+                    開始計算
+                </button>
+            </p>
+        </form>
+    </div>
+    
+    <div class="container container-output">
+        <h2>計算結果：<span id="result">0</span></h2>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // 綁定元素
+            const num1 = $('#num1');
+            const num2 = $('#num2');
+            const opt = $('#opt');
+            const btnCalc = $('#btnCalc');
+            const result = $('#result');
+            const myForm = $('#myForm');
+
+            // 表單提交事件
+            myForm.submit(function (e) {
+                e.preventDefault();
+
+                // 添加載入效果
+                btnCalc.addClass('loading').text('計算中...');
+
+                let url = './calculator.php';
+                let formData = myForm.serialize();
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    success: function (res) {
+                        console.log('res', res);
+                        
+                        // 更新結果
+                        setTimeout(() => {
+                            result.text(res.textResult);
+                            console.log('res.colorResult', res.colorResult);
+                            
+                            // 更新 container-output 的 class
+                            $('.container-output').removeClass('bg-red bg-green bg-yellow')
+                                                  .addClass(res.colorResult);
+                            
+                            // 恢復按鈕狀態
+                            btnCalc.removeClass('loading').text('開始計算');
+                        }, 300);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('錯誤:', error);
+                        result.text('❌ 計算失敗，請重試');
+                        btnCalc.removeClass('loading').text('開始計算');
+                    }
+                });
+            });
+
+            // 輸入驗證提示
+            $('input[type="number"]').on('input', function() {
+                if ($(this).val() && !$(this).val().match(/^-?\d*\.?\d*$/)) {
+                    $(this).css('border-color', '#e74c3c');
+                } else {
+                    $(this).css('border-color', '#e0e0e0');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

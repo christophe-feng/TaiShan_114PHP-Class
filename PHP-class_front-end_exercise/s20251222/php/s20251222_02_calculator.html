@@ -5,37 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<style>
-    .container {
-        width: 50%;
-        /* height: 30vh; */
-        margin: auto;
-        margin-top: 10px;
-        text-align: center;
-        /* padding: 10px; */
-        /* border: 1px solid black; */
-    }
+    <style>
+        .container {
+            width: 50%;
+            margin: auto;
+            margin-top: 10px;
+            text-align: center;
+        }
 
-    /* .container-input {
+        /* .container-input {
             background-color: lightblue;
         } */
 
-    /* .container-output {
+        /* .container-output {
             background-color: lightpink;
         } */
-</style>
+
+        .bg-red {
+            background-color: lightpink;
+        }
+
+        .bg-green {
+            background-color: lightgreen;
+        }
+
+        .bg-yellow {
+            background-color: lightyellow;
+        }
+    </style>
+</head>
 
 <body>
     <div class="container container-input">
-        <form action="" method="get">
+        <form action="" method="get" id="myForm">
             <p>
                 <label for="num1"></label>
-                <input type="number" name="num1" id="num1" value="100">
-            </p>
-            <p>
-                <label for="num2"></label>
-                <input type="number" name="num2" id="num2" value="50">
+                <input type="number" name="num1" id="num1">
             </p>
             <p>
                 <label for="opt"></label>
@@ -47,20 +52,31 @@
                 </select>
             </p>
             <p>
-                <!-- input -->
-                <!-- <input type="sumbit" value="計算"> -->
-                <button type="sumbit" id="btnCalc">計算</button>
+                <label for="num2"></label>
+                <input type="number" name="num2" id="num2">
+            </p>
+            <p>
+                <label for="color"></label>
+                <select name="color" id="color">
+                    <option value="red">紅</option>
+                    <option value="green">綠</option>
+                    <option value="yellow">黃</option>
+                </select>
+            </p>
+            <p>
+                <!-- <input type="submit" value="計算"> -->
+                <button type="submit" id="btnCalc">計算</button>
             </p>
         </form>
     </div>
     <div class="container container-output">
-        <h2>結果：<span id="result">0</span></h2>
+        <h2>計算結果：<span id="result">0</span></h2>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
-        </script>
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -73,12 +89,11 @@
             const myForm = $('#myForm');
 
             // action
-
             // result.text('150');
-            $(myForm).sumbit(function (e) {
+            $(myForm).submit(function (e) {
                 e.preventDefault();
 
-                let url = './result.php';
+                let url = './calculator.php'
                 let formData = myForm.serialize();
 
                 $.ajax({
@@ -89,12 +104,12 @@
                     success: function (res) {
                         console.log('res', res);
                         result.text(res.textResult);
+                        console.log('res.colorResult', res.colorResult);
+                        result.attr('class', res.colorResult);
                     }
                 });
             });
-
         });
-
     </script>
 </body>
 
