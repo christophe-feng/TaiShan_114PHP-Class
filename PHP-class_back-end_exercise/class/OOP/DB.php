@@ -46,7 +46,7 @@ Class DB {
                 }
             }
 
-        }
+        
 
         if(isset($arg[1])){
             $sql .=$arg[1];
@@ -54,7 +54,7 @@ Class DB {
 
         // echo $sql;       
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
+        }
 
     // $id → 可以是數字，也可以是陣列
     function find($id){
@@ -150,35 +150,36 @@ function to($url){
 }
 
 
-$daily=new DB('daily_account');
-$category=new DB('category');
+// $daily=new DB('daily_account');
+// $category=new DB('category');
 
-// print all
-echo "<pre>";
-print_r($daily->all(['store' => '7-11'], 'order by payment desc'));
-echo "</pre>";
+// // print all
+// echo "<pre>";
+// print_r($daily->all(['store' => '7-11'], 'order by payment desc'));
+// echo "</pre>";
 
-// print find
-echo "<pre>";
-print_r($daily->find(3));
-echo "</pre>";
+// // print find
+// echo "<pre>";
+// print_r($daily->find(3));
+// echo "</pre>";
 
-echo "<pre>";
-print_r($category->find(3));
-echo "</pre>";
+// echo "<pre>";
+// print_r($category->find(3));
+// echo "</pre>";
 
-// print update
-$row=$category->find(6);
-echo "<pre>";
-print_r($row);
-echo "</pre>";
-$row['name']='飲料';
-echo "<pre>";
-print_r($row);
-echo "</pre>";
-$category->update($row);
+// // print update
+// $row=$category->find(6);
+// echo "<pre>";
+// print_r($row);
+// echo "</pre>";
+// $row['name']='飲料';
+// echo "<pre>";
+// print_r($row);
+// echo "</pre>";
+// $category->update($row);
 
-// print insert
-$category->insert(['name'=>'電影']);
+// // print insert
+// $category->insert(['name'=>'電影']);
 
-$category->save(['id' => '6', 'name' => '休息']);
+// $category->save(['id' => '6', 'name' => '休息']);
+}
