@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css"
+        integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .bg-pink {
+            background-color: lightpink !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <h2>Bordered Table</h2>
+        <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr class="">
+                    <th width="10%" class="bg-pink">ID</th>
+                    <th width="10%" class="bg-pink">NAME</th>
+                    <th class="bg-pink">MOBILE</th>
+                </tr>
+            </thead>
+            <tbody id="myTbody">
+                <!-- <tr>
+                    <td>1</td>
+                    <td>amy</td>
+                    <td>0911</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js"
+        integrity="sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).ready(function () {
+            // data
+
+            let data = [
+                { id: 1, name: 'amy', mobile: '0911' },
+                { id: 2, name: 'bob', mobile: '0922' },
+                { id: 3, name: 'cat', mobile: '0933' },
+                { id: 4, name: 'dog', mobile: '0944' },
+                { id: 5, name: 'egg', mobile: '0955' },
+                { id: 6, name: 'fox', mobile: '0966' }
+            ];
+
+            console.log('data', data);
+
+            // bind
+            const myTbody = $('#myTbody');
+            console.log('myTbody', myTbody);
+
+            let tmpText = ``;
+
+            // action
+            $.each(data, function (key, value) {
+                tmpText += `
+                <tr>
+                    <td>${value.id}</td>
+                    <td>${value.name}</td>
+                    <td>${value.mobile}</td>
+                </tr>
+                `;
+            });
+            myTbody.append(tmpText);
+        });
+    </script>
+</body>
+
+</html>
